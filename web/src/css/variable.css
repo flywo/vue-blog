@@ -2,4 +2,6 @@
     --bg-color: #F9F6F6;
     --bg-gray-color: rgba(0, 0, 0, 0.3);
     --bg-green: #14e857;
+    --text-black: #333333;
+    --screen-min-width: 1000px;
 }

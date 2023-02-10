@@ -1,15 +1,28 @@
 <template>
-    <div class="back">
-        <router-view></router-view>
+  <div class="back">
+    <div class="layout-nav">
+      <nav-view></nav-view>
     </div>
+    <router-view></router-view>
+  </div>
 </template>
 
 <script>
+import NavView from "./Nav.vue";
 export default {
-    name: "FrontLayout"    
-}
+  components: {
+    NavView,
+  },
+  name: "FrontLayout",
+};
 </script>
 
 <style lang="scss" scoped>
-
+.back {
+  height: 100%;
+  width: 100%;
+  .layout-nav {
+    height: 150px;
+  }
+}
 </style>
