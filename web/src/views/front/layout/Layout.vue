@@ -22,7 +22,7 @@ export default {
   height: 100%;
   width: 100%;
   .layout-nav {
-    height: 150px;
+    height: 120px;
   }
 }
 </style>
