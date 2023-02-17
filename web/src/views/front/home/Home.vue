@@ -30,7 +30,8 @@ export default {
           image: "favicon.ico",
           time: "2022-00-00 11:11:11",
           title: "标题标题标题标题标题标题标题标题标题标题标题",
-          preview: "预览预览预览预览预览预览预览预览预览预览预览预览预览预览预览预览预览预览预览预览预览预览",
+          preview:
+            "预览预览预览预览预览预览预览预览预览预览预览预览预览预览预览预览预览预览预览预览预览预览",
           type: "类别",
         },
         {
@@ -108,7 +109,7 @@ export default {
   .content {
     margin-left: calc((100% - 1000px) / 2);
     width: 1000px;
-    height: 100%;
+    padding-bottom: 20px;
     .list {
       width: 100%;
       display: grid;

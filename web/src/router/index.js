@@ -13,6 +13,10 @@ const routes = [
             path: "/home",
             component: () =>
                 import ("@/views/front/home/Home.vue")
+        }, {
+            path: "/content",
+            component: () =>
+                import ("@/views/front/content/Content.vue")
         }]
     },
     // 重定向到首页
