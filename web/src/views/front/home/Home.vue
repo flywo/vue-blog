@@ -26,10 +26,11 @@ export default {
     return {
       list: [
         {
+          id: 1,
           image: "favicon.ico",
           time: "2022-00-00 11:11:11",
-          title: "标题",
-          preview: "预览",
+          title: "标题标题标题标题标题标题标题标题标题标题标题",
+          preview: "预览预览预览预览预览预览预览预览预览预览预览预览预览预览预览预览预览预览预览预览预览预览",
           type: "类别",
         },
         {
