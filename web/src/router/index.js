@@ -19,6 +19,30 @@ const routes = [
                 import ("@/views/front/content/Content.vue")
         }]
     },
+    // 管理登录
+    {
+        path: "/admin-login",
+        component: () =>
+            import ("@/views/admin/login/Login.vue")
+    },
+    // 管理列表
+    {
+        path: "/admin-list",
+        component: () =>
+            import ("@/views/admin/list/List.vue")
+    },
+    // 编辑文章
+    {
+        path: "/admin-edit",
+        component: () =>
+            import ("@/views/admin/edit/Edit.vue")
+    },
+    // markdown帮助页面
+    {
+        path: "/help",
+        component: () =>
+            import ("@/views/admin/help/Help.vue")
+    },
     // 重定向到首页
     {
         path: "/",
