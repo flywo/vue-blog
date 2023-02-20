@@ -5,33 +5,24 @@
         <p class="text" style="white-space: pre-line">{{ content }}</p>
       </div>
       <div class="item">
-        <markdown-it-vue
-          :content="content"
-          :options="options"
-        ></markdown-it-vue>
+        <markdown-show :content="content"></markdown-show>
       </div>
     </div>
   </div>
 </template>
 
 <script>
-import MarkdownItVue from "markdown-it-vue";
-import "markdown-it-vue/dist/markdown-it-vue.css";
+import MarkdownShow from "@/components/MarkdownShow.vue";
 import help from "./help";
 
 export default {
   name: "MarkdownHelp",
   components: {
-    MarkdownItVue,
+    MarkdownShow,
   },
   data() {
     return {
       content: help,
-      options: {
-        markdownIt: {
-          linkify: true,
-        },
-      },
     };
   },
 };

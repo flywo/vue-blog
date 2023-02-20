@@ -3,27 +3,21 @@
     <div class="content">
       <div class="time">2022-22-22 11:11:11</div>
       <h1 class="title">这是一个标题</h1>
-      <markdown-it-vue :content="content" :options="options"></markdown-it-vue>
+      <markdown-show :content="content"></markdown-show>
     </div>
   </div>
 </template>
 
 <script>
-import MarkdownItVue from "markdown-it-vue";
-import "markdown-it-vue/dist/markdown-it-vue.css";
+import MarkdownShow from "@/components/MarkdownShow.vue";
 
 export default {
   components: {
-    MarkdownItVue,
+    MarkdownShow,
   },
   data() {
     return {
       content: "",
-      options: {
-        markdownIt: {
-          linkify: true,
-        },
-      },
     };
   },
   name: "BlogContent",
