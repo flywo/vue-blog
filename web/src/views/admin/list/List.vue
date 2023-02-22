@@ -47,6 +47,23 @@
           </template>
         </el-input>
         <el-input
+          type="textarea"
+          placeholder="请输入图片地址"
+          v-model="editImage"
+          rows="2"
+          resize="none"
+        >
+        </el-input>
+        <el-input
+          type="textarea"
+          placeholder="请输入预览"
+          v-model="editPreview"
+          maxlength="50"
+          show-word-limit
+          resize="none"
+        >
+        </el-input>
+        <el-input
           class="blog-content"
           type="textarea"
           placeholder="请输入博客内容"
@@ -93,6 +110,8 @@ export default {
       ],
       currentBlog: 0,
       editTitle: "",
+      editImage: "",
+      editPreview: "",
       editContent: "",
     };
   },
