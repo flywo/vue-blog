@@ -5,6 +5,7 @@
       markdownIt: {
         linkify: true,
         html: true,
+        breaks: true,
         typographer: true,
       },
     }"

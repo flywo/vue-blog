@@ -115,7 +115,6 @@ export default {
           -webkit-transition: all 500ms ease;
           -o-transition: all 500ms ease;
           transition: all 500ms ease;
-          list-style: none;
           li {
             -webkit-transition: all 300ms ease;
             -o-transition: all 300ms ease;

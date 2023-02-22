@@ -32,13 +32,47 @@
         </li>
       </ul>
     </div>
-    <div class="blog-content"></div>
+    <div class="blog-content">
+      <div class="left">
+        <el-input
+          type="text"
+          placeholder="请输入标题"
+          v-model="editTitle"
+          maxlength="20"
+          show-word-limit
+          clearable
+        >
+          <template slot="append">
+            <el-button>保存</el-button>
+          </template>
+        </el-input>
+        <el-input
+          class="blog-content"
+          type="textarea"
+          placeholder="请输入博客内容"
+          v-model="editContent"
+          maxlength="65535"
+          show-word-limit
+          resize="none"
+        ></el-input>
+      </div>
+      <div class="right">
+        <h1 class="title">{{ editTitle }}</h1>
+        <markdown-show :content="editContent"></markdown-show>
+      </div>
+    </div>
+    <div class="help" @click="openMarkdownHelp">Markdown帮助</div>
   </div>
 </template>
 
 <script>
+import MarkdownShow from "@/components/MarkdownShow.vue";
+
 export default {
   name: "AdminList",
+  components: {
+    MarkdownShow,
+  },
   data() {
     return {
       types: ["1", "2"],
@@ -58,6 +92,8 @@ export default {
         },
       ],
       currentBlog: 0,
+      editTitle: "",
+      editContent: "",
     };
   },
   methods: {
@@ -66,6 +102,9 @@ export default {
     },
     deleteType() {},
     editType() {},
+    openMarkdownHelp() {
+      window.open("/help");
+    },
   },
 };
 </script>
@@ -87,10 +126,6 @@ export default {
       margin-block: 10px;
     }
     ul {
-      list-style: none;
-      padding-left: 0;
-      margin-top: 0;
-      margin-bottom: 0;
       li {
         line-height: 40px;
         font-size: 15px;
@@ -128,10 +163,6 @@ export default {
       text-align: center;
     }
     ul {
-      list-style: none;
-      padding-left: 0;
-      margin-top: 0;
-      margin-bottom: 0;
       li {
         cursor: pointer;
         height: 90px;
@@ -174,7 +205,48 @@ export default {
   .blog-content {
     width: 70%;
     height: 100%;
-    overflow-y: auto;
+    display: flex;
+    .left,
+    .right {
+      width: 0;
+      flex-grow: 1;
+    }
+    .left {
+      background-color: white;
+      display: flex;
+      flex-direction: column;
+    }
+    .blog-content {
+      flex-grow: 1;
+      width: 100%;
+    }
+    .left ::v-deep .el-input__inner {
+      border-radius: 0;
+    }
+    .left ::v-deep .el-input-group__append {
+      border-radius: 0;
+    }
+    .left ::v-deep .el-textarea__inner {
+      border-radius: 0;
+    }
+    .right {
+      padding: 20px;
+      .title {
+        font-size: 40px;
+        line-height: 1.3;
+        font-family: "Montserrat", sans-serif;
+        letter-spacing: 0.6px;
+        color: #222;
+      }
+    }
+  }
+  .help {
+    position: fixed;
+    top: 10px;
+    right: 10px;
+    color: #999;
+    cursor: pointer;
+    font-size: 16px;
   }
 }
 </style>
