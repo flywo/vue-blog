@@ -31,12 +31,6 @@ const routes = [
         component: () =>
             import ("@/views/admin/list/List.vue")
     },
-    // 编辑文章
-    {
-        path: "/admin-edit",
-        component: () =>
-            import ("@/views/admin/edit/Edit.vue")
-    },
     // markdown帮助页面
     {
         path: "/help",
