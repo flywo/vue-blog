@@ -11,7 +11,10 @@ module.exports = defineConfig({
         proxy: {
             "/api": {
                 target: "http://localhost:3000"
-            }
+            },
+            "/upload": {
+                target: "http://localhost:3000"
+            },
         }
     }
 })

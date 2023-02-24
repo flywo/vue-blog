@@ -5,6 +5,7 @@ const onerror = require('koa-onerror')
 const bodyparser = require('koa-bodyparser')
 const logger = require('koa-logger')
 const koajwt = require('koa-jwt')
+const static = require('koa-static')
 
 const {
     ErrorModel
@@ -17,6 +18,8 @@ const file = require("./routes/file");
 
 // error handler
 onerror(app)
+
+app.use(static(__dirname + "/upload"));
 
 // middlewares
 app.use(bodyparser({
