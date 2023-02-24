@@ -1,4 +1,6 @@
 const router = require("koa-router")();
+const jwt = require("jsonwebtoken");
+
 const {
     SuccessModel,
     ErrorModel
@@ -12,7 +14,14 @@ router.post("/login", async(ctx, next) => {
         password
     } = ctx.request.body;
     if (username === "yuhua" && password === "yuhua") {
-        ctx.body = new SuccessModel("登录成功！");
+        const token = jwt.sign({
+            username
+        }, "blog", {
+            expiresIn: "1d"
+        });
+        ctx.body = new SuccessModel({
+            token
+        }, "登录成功！");
     } else {
         ctx.body = new ErrorModel("账号或密码不正确！");
     }

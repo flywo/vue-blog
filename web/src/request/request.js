@@ -3,6 +3,17 @@ import {
     Message
 } from "element-ui";
 
+// 创建实例
+const service = axios.create({
+    timeout: 8000
+});
+
+// 请求拦截
+service.interceptors.request.use(request => {
+    request.headers.Authorization = "Bearer " + localStorage.getItem("token");
+    return request;
+});
+
 // 统一调用该函数进行网络请求。可进行后续封装，但务必都调用该函数发送请求。
 export function request(
     axiosOptions,
@@ -11,7 +22,7 @@ export function request(
     success,
     fail
 ) {
-    return axios(axiosOptions)
+    return service(axiosOptions)
         .then((res) => {
             if (res.data.code === 0) {
                 if (showSuccessTips === true) {
