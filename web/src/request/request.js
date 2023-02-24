@@ -97,3 +97,31 @@ export function get(
         fail
     );
 }
+
+// 上传文件
+export function upload(
+    url,
+    file,
+    showSuccessTips,
+    showFailTips,
+    progress,
+    success,
+    fail
+) {
+    const form = new FormData();
+    form.append("file", file);
+    return request({
+            headers: {
+                "Content-Type": "multipart/form-data",
+            },
+            url: "/api" + url,
+            data: form,
+            onUploadProgress: progress,
+            method: "post",
+        },
+        showSuccessTips,
+        showFailTips,
+        success,
+        fail
+    );
+}

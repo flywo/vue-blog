@@ -46,14 +46,23 @@
             <el-button>保存</el-button>
           </template>
         </el-input>
-        <el-input
-          type="textarea"
-          placeholder="请输入图片地址"
-          v-model="editImage"
-          rows="2"
-          resize="none"
-        >
-        </el-input>
+        <div class="upload">
+          <el-upload
+            class="upload-image"
+            drag
+            action="/api/file/upload"
+            :multiple="false"
+            :show-file-list="false"
+            :http-request="uploadImage"
+            accept="image/png, image/jpeg"
+          >
+            <i class="el-icon-upload"></i>
+            <div class="el-upload__text">
+              将文件拖到此处，或<em>点击上传</em>
+            </div>
+          </el-upload>
+          <el-image class="show-image" :src="imageUrl" fit="cover"></el-image>
+        </div>
         <el-input
           type="textarea"
           placeholder="请输入预览"
@@ -84,6 +93,7 @@
 
 <script>
 import MarkdownShow from "@/components/MarkdownShow.vue";
+import { upload } from "@/request/request";
 
 export default {
   name: "AdminList",
@@ -110,7 +120,7 @@ export default {
       ],
       currentBlog: 0,
       editTitle: "",
-      editImage: "",
+      imageUrl: "",
       editPreview: "",
       editContent: "",
     };
@@ -123,6 +133,11 @@ export default {
     editType() {},
     openMarkdownHelp() {
       window.open("/help");
+    },
+    uploadImage(event) {
+      upload("/file/upload", event.file, true, true, null, (data) => {
+        this.imageUrl = "/upload/" + data.path;
+      });
     },
   },
 };
@@ -234,6 +249,23 @@ export default {
       background-color: white;
       display: flex;
       flex-direction: column;
+      .upload {
+        display: flex;
+        .upload-image {
+          width: 70%;
+          ::v-deep .el-upload {
+            width: 100%;
+          }
+          ::v-deep .el-upload-dragger {
+            width: 100%;
+          }
+        }
+        .show-image {
+          margin: 10px;
+          width: 0;
+          flex-grow: 1;
+        }
+      }
     }
     .blog-content {
       flex-grow: 1;
