@@ -6,5 +6,12 @@ module.exports = defineConfig({
             args[0].title = '余华的个人博客';
             return args;
         })
+    },
+    devServer: {
+        proxy: {
+            "/api": {
+                target: "http://localhost:3000"
+            }
+        }
     }
 })

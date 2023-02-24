@@ -14,7 +14,7 @@ router.post("/login", async(ctx, next) => {
     if (username === "yuhua" && password === "yuhua") {
         ctx.body = new SuccessModel("登录成功！");
     } else {
-        ctx.body = new ErrorModel("登录失败！");
+        ctx.body = new ErrorModel("账号或密码不正确！");
     }
 });
 

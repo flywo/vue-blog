@@ -31,6 +31,7 @@
 </template>
 
 <script>
+import { post } from "@/request/request.js";
 export default {
   name: "AdminLogin",
   data() {
@@ -63,7 +64,20 @@ export default {
     login() {
       this.$refs.form.validate((valid) => {
         if (valid) {
-            this.$router.push("/admin-list");
+          post(
+            "/user/login",
+            null,
+            {
+              username: this.model.username,
+              password: this.model.password,
+            },
+            false,
+            true,
+            () => {
+              this.$message.success("登录成功！");
+              this.$router.push("/admin-list");
+            }
+          );
         } else {
           return false;
         }
