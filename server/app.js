@@ -13,6 +13,7 @@ const {
 const user = require("./routes/user");
 const type = require("./routes/type");
 const blog = require("./routes/blog");
+const file = require("./routes/file");
 
 // error handler
 onerror(app)
@@ -45,9 +46,10 @@ app.use(koajwt({
     path: ["/api/user/login", "/api/type/list", "/api/blog/list", "/api/blog/detail", ]
 }));
 
-app.use(user.routes(), user.allowedMethods());
-app.use(type.routes(), type.allowedMethods());
 app.use(blog.routes(), blog.allowedMethods());
+app.use(type.routes(), type.allowedMethods());
+app.use(user.routes(), user.allowedMethods());
+app.use(file.routes(), file.allowedMethods());
 
 // error-handling
 app.on('error', (err, ctx) => {
