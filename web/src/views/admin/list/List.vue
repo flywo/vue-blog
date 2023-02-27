@@ -93,7 +93,7 @@
 
 <script>
 import MarkdownShow from "@/components/MarkdownShow.vue";
-import { upload } from "@/request/request";
+import { upload, post } from "@/request/request";
 
 export default {
   name: "AdminList",
@@ -135,6 +135,20 @@ export default {
       window.open("/help");
     },
     uploadImage(event) {
+      if (this.imageUrl) {
+        post(
+          "/file/delete",
+          null,
+          {
+            filename: this.imageUrl,
+          },
+          false,
+          false,
+          (data) => {
+            console.log(data);
+          }
+        );
+      }
       upload("/file/upload", event.file, true, true, null, (data) => {
         this.imageUrl = "/upload/" + data.path;
       });

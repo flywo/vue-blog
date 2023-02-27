@@ -13,7 +13,7 @@ module.exports = defineConfig({
                 target: "http://localhost:3000"
             },
             "/upload": {
-                target: "http://localhost:3000"
+                target: "http://localhost:8081"
             },
         }
     }
