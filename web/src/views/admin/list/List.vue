@@ -19,12 +19,13 @@
       </ul>
     </div>
     <div class="blog-list">
-      <div class="add">新建文章</div>
+      <div class="add" @click="addNewBlog">新建文章</div>
       <ul>
         <li
           v-for="(item, index) in blogs"
           :key="'blog-' + index"
           :class="index === currentBlog ? 'blog-current' : ''"
+          @click="changeBlog(index)"
         >
           <i class="el-icon-delete-solid more"></i>
           <span>{{ item.title }}</span>
@@ -103,9 +104,9 @@ export default {
   data() {
     return {
       types: [],
-      currentType: 0,
+      currentType: null,
       blogs: [],
-      currentBlog: 0,
+      currentBlog: null,
       editTitle: "",
       imageUrl: "",
       editPreview: "",
@@ -117,9 +118,26 @@ export default {
     this.queryBlogList();
   },
   methods: {
+    // 添加博客
+    addNewBlog() {
+      this.currentBlog = null;
+      this.editTitle = "";
+      this.imageUrl = "";
+      this.editPreview = "";
+      this.editContent = "";
+    },
     // 改变类型
     changeType(index) {
       this.currentType = index;
+    },
+    // 改变博客
+    changeBlog(index) {
+      this.currentBlog = index;
+      const blog = this.blogs[index];
+      this.editTitle = blog.title;
+      this.imageUrl = blog.image;
+      this.editPreview = blog.preview;
+      this.editContent = blog.content;
     },
     // 查询类型
     queryTypeList() {
@@ -129,9 +147,7 @@ export default {
     },
     // 查询博客列
     queryBlogList() {
-      get("/blog/list", {
-        typeId: 4
-      }, false, false, (data) => {
+      get("/blog/list", null, false, false, (data) => {
         this.blogs = data;
       });
     },
@@ -188,20 +204,26 @@ export default {
     },
     // 添加博客
     addBlog() {
+      if (this.currentType === null) {
+        this.$message.error("必须先选择类型！");
+        return;
+      }
       post(
-        "/blog/add",
+        this.currentBlog === null ? "/blog/add" : "/blog/update",
         null,
         {
-          image: "1",
-          title: "标题",
-          preview: "预览",
-          typeId: 4,
-          content: "内容",
+          id:
+            this.currentBlog === null ? null : this.blogs[this.currentBlog].id,
+          image: this.imageUrl,
+          title: this.editTitle,
+          preview: this.editPreview,
+          typeId: this.types[this.currentType].id,
+          content: this.editContent,
         },
         true,
         true,
-        (data) => {
-          console.log(data);
+        () => {
+          this.queryBlogList();
         }
       );
     },

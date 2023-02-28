@@ -32,30 +32,21 @@ router.get("/detail", async(ctx, next) => {
 router.post("/add", async(ctx, next) => {
     const body = ctx.request.body;
     const data = await exec(sql.insertBlogData(body));
-    console.log(data);
-    ctx.body = new SuccessModel("添加成功");
+    ctx.body = new SuccessModel({
+        id: data.insertId
+    }, "添加成功");
 });
 
 router.post("/update", async(ctx, next) => {
-    const {
-        id,
-        image,
-        title,
-        preview,
-        content
-    } = ctx.request.body;
-    ctx.body = new SuccessModel({
-        id,
-        image,
-        title,
-        preview,
-        content
-    });
+    const body = ctx.request.body;
+    const data = await exec(sql.updateBlogData(body));
+    ctx.body = new SuccessModel("编辑成功");
 })
 
 router.post("/delete", async(ctx, next) => {
     const id = ctx.request.body.id;
-    ctx.body = new SuccessModel("删除成功:" + id);
+    await exec(sql.deleteBlogData(id));
+    ctx.body = new SuccessModel("删除成功");
 })
 
 module.exports = router;

@@ -1,15 +1,16 @@
 module.exports = {
-    // 创建数据库
-    createBlogDB: `CREATE DATABASE IF NOT EXISTS blog;`,
-    // 使用数据库
-    useBlogDB: `USE blog;`,
-    // 创建类型表
-    createTypeTable: `CREATE TABLE IF NOT EXISTS type (
+    // 数据库初始化
+    initDB: `
+    SET GLOBAL time_zone = '+8:00';
+    SET time_zone = '+8:00'; 
+    FLUSH PRIVILEGES;
+    CREATE DATABASE IF NOT EXISTS blog;
+    USE blog;
+    CREATE TABLE IF NOT EXISTS type (
         id INT AUTO_INCREMENT PRIMARY KEY,
         title VARCHAR(10) NOT NULL
-    );`,
-    // 创建博客表
-    createBlogTable: `CREATE TABLE IF NOT EXISTS blog (
+    );
+    CREATE TABLE IF NOT EXISTS blog (
         id INT AUTO_INCREMENT PRIMARY KEY,
         image VARCHAR(100) NOT NULL,
         time DATETIME NOT NULL DEFAULT CURRENT_TIMESTAMP,
@@ -18,7 +19,8 @@ module.exports = {
         content TEXT NOT NULL,
         type_id INT NOT NULL,
         CONSTRAINT fk_blog_type_id FOREIGN KEY (type_id) REFERENCES type(id)
-    );`,
+    );
+    `,
     // 查询类型列表
     queryTypeTable: `SELECT * FROM type`,
     // 插入类型数据
@@ -36,9 +38,13 @@ module.exports = {
         if (typeId) {
             sql += ` AND type_id = '${typeId}'`
         }
-        return sql + " AND blog.type_id = type.id ORDER BY time;"
+        return sql + " AND blog.type_id = type.id ORDER BY time DESC;"
     },
     // 插入博客
     insertBlogData: (blog) => `INSERT INTO blog (image, title, preview, content, type_id) 
-    VALUES ('${blog.image}', '${blog.title}', '${blog.preview}', '${blog.content}', '${blog.typeId}');`
+    VALUES ('${blog.image}', '${blog.title}', '${blog.preview}', '${blog.content}', '${blog.typeId}');`,
+    // 删除博客
+    deleteBlogData: id => `DELETE FROM blog where id = '${id}';`,
+    updateBlogData: (blog) => `UPDATE blog SET image = '${blog.image}', preview = '${blog.preview}', title = '${blog.title}', content = '${blog.content}', type_id = '${blog.typeId}'
+    WHERE id = '${blog.id}'`,
 }
