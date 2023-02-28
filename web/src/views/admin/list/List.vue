@@ -27,7 +27,10 @@
           :class="index === currentBlog ? 'blog-current' : ''"
           @click="changeBlog(index)"
         >
-          <i class="el-icon-delete-solid more"></i>
+          <i
+            class="el-icon-delete-solid more"
+            @click="showBlogDelete(item)"
+          ></i>
           <span>{{ item.title }}</span>
           <span>{{ item.preview }}</span>
         </li>
@@ -62,7 +65,7 @@
               将文件拖到此处，或<em>点击上传</em>
             </div>
           </el-upload>
-          <el-image class="show-image" :src="imageUrl" fit="cover"></el-image>
+          <el-image class="show-image" :src="imageUrl || ''" fit="cover"></el-image>
         </div>
         <el-input
           type="textarea"
@@ -85,7 +88,7 @@
       </div>
       <div class="right">
         <h1 class="title">{{ editTitle }}</h1>
-        <markdown-show :content="editContent"></markdown-show>
+        <markdown-show :content="editContent || ''"></markdown-show>
       </div>
     </div>
     <div class="help" @click="openMarkdownHelp">Markdown帮助</div>
@@ -150,6 +153,20 @@ export default {
       get("/blog/list", null, false, false, (data) => {
         this.blogs = data;
       });
+    },
+    // 博客删除弹窗
+    showBlogDelete(blog) {
+      this.$confirm("此操作将永久删除该博客, 是否继续?", "提示", {
+        confirmButtonText: "确定",
+        cancelButtonText: "取消",
+        type: "warning",
+      })
+        .then(() => {
+          post("/blog/delete", null, { id: blog.id }, true, true, () => {
+            this.queryBlogList();
+          });
+        })
+        .catch(() => {});
     },
     // 类型删除弹窗
     showTypeDelete(type) {
