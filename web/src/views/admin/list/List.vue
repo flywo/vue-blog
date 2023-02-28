@@ -145,6 +145,17 @@ export default {
       this.imageUrl = blog.image;
       this.editPreview = blog.preview;
       this.editContent = blog.content;
+      get(
+        "/blog/detail",
+        {
+          id: blog.id,
+        },
+        false,
+        false,
+        (data) => {
+          this.editContent = data.content;
+        }
+      );
     },
     // 查询类型
     queryTypeList() {

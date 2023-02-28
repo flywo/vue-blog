@@ -7,26 +7,25 @@ const {
     exec
 } = require("../db/mysql");
 const sql = require("../db/sql");
+const { removeNoUseImage } = require("../utils/tool");
 
 router.prefix("/api/blog");
 
 router.get("/list", async(ctx, next) => {
     const typeId = ctx.query.typeId;
     const list = await exec(sql.queryBlogTable(typeId));
+    removeNoUseImage(list);
     ctx.body = new SuccessModel(list);
 });
 
 router.get("/detail", async(ctx, next) => {
     const id = ctx.query.id;
-    ctx.body = new SuccessModel({
-        id,
-        image: "favicon.ico",
-        time: "2022-00-00 11:11:11",
-        title: "iOS上架流程",
-        preview: "最新的iOS上架流程",
-        type: "iOS",
-        content: "# 1首先要"
-    });
+    const list = await exec(sql.querySingleBlog(id));
+    if (list.length > 0) {
+        ctx.body = new SuccessModel(list[0]);
+    } else {
+        ctx.body = new ErrorModel("博客不存在");
+    }
 });
 
 router.post("/add", async(ctx, next) => {
