@@ -3,7 +3,7 @@
     <div class="content">
       <div class="time">{{ blog.time }}</div>
       <h1 class="title">{{ blog.title }}</h1>
-      <markdown-show :content="blog.content"></markdown-show>
+      <markdown-show :content="blog.content || ''"></markdown-show>
     </div>
   </div>
 </template>

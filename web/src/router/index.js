@@ -9,15 +9,26 @@ const routes = [
         path: "/user-layout",
         component: () =>
             import ("@/views/front/layout/Layout.vue"),
-        children: [{
-            path: "/home",
-            component: () =>
-                import ("@/views/front/home/Home.vue")
-        }, {
-            path: "/content",
-            component: () =>
-                import ("@/views/front/content/Content.vue")
-        }]
+        children: [
+            // 首页
+            {
+                path: "/home",
+                component: () =>
+                    import ("@/views/front/home/Home.vue")
+            },
+            // 博客内容
+            {
+                path: "/content",
+                component: () =>
+                    import ("@/views/front/content/Content.vue")
+            },
+            // 关于我
+            {
+                path: "/me",
+                component: () =>
+                    import ("@/views/front/me/Me.vue")
+            }
+        ]
     },
     // 管理登录
     {

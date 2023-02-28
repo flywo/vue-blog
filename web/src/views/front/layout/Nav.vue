@@ -38,14 +38,20 @@ export default {
   },
   methods: {
     changeToMain() {
-      this.current = 0;
+      if (this.$route.path !== "/home") {
+        this.current = 0;
+        this.$router.push("/home");
+      }
     },
     changeCurrent(event) {
       const name = event.target.innerText;
       if (name === "首页") {
-        this.current = 0;
+        this.changeToMain();
       } else if (name === "关于我") {
-        this.current = 2;
+        if (this.$route.path !== "/me") {
+          this.current = 2;
+          this.$router.push("/me");
+        }
       }
     },
   },
