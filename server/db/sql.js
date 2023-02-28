@@ -12,7 +12,7 @@ module.exports = {
     createBlogTable: `CREATE TABLE IF NOT EXISTS blog (
         id INT AUTO_INCREMENT PRIMARY KEY,
         image VARCHAR(100) NOT NULL,
-        time DATETIME NOT NULL,
+        time DATETIME NOT NULL DEFAULT CURRENT_TIMESTAMP,
         title VARCHAR(20) NOT NULL,
         preview VARCHAR(50) NOT NULL,
         content TEXT NOT NULL,
@@ -29,4 +29,16 @@ module.exports = {
     updateTypeData: (id, title) => `UPDATE type SET title = '${title}' WHERE id = '${id}';`,
     // 查询用户
     queryUserData: (username, password) => `SELECT * FROM user WHERE username = ${username} and password = ${password}`,
+    // 查询博客列表
+    queryBlogTable: (typeId) => {
+        let sql = `SELECT blog.id, blog.image, blog.title, blog.preview, blog.time, type.id typeId, type.title typeName 
+        FROM blog, type WHERE 1=1`
+        if (typeId) {
+            sql += ` AND type_id = '${typeId}'`
+        }
+        return sql + " AND blog.type_id = type.id ORDER BY time;"
+    },
+    // 插入博客
+    insertBlogData: (blog) => `INSERT INTO blog (image, title, preview, content, type_id) 
+    VALUES ('${blog.image}', '${blog.title}', '${blog.preview}', '${blog.content}', '${blog.typeId}');`
 }

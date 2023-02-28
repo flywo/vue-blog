@@ -43,7 +43,7 @@
           clearable
         >
           <template slot="append">
-            <el-button>保存</el-button>
+            <el-button @click="addBlog">保存</el-button>
           </template>
         </el-input>
         <div class="upload">
@@ -104,20 +104,7 @@ export default {
     return {
       types: [],
       currentType: 0,
-      blogs: [
-        {
-          title: "标题",
-          preview: "预览",
-        },
-        {
-          title: "标题",
-          preview: "预览",
-        },
-        {
-          title: "标题",
-          preview: "预览",
-        },
-      ],
+      blogs: [],
       currentBlog: 0,
       editTitle: "",
       imageUrl: "",
@@ -127,6 +114,7 @@ export default {
   },
   mounted() {
     this.queryTypeList();
+    this.queryBlogList();
   },
   methods: {
     // 改变类型
@@ -137,6 +125,14 @@ export default {
     queryTypeList() {
       get("/type/list", null, false, false, (data) => {
         this.types = data;
+      });
+    },
+    // 查询博客列
+    queryBlogList() {
+      get("/blog/list", {
+        typeId: 4
+      }, false, false, (data) => {
+        this.blogs = data;
       });
     },
     // 类型删除弹窗
@@ -190,8 +186,25 @@ export default {
         })
         .catch(() => {});
     },
-    deleteType() {},
-    editType() {},
+    // 添加博客
+    addBlog() {
+      post(
+        "/blog/add",
+        null,
+        {
+          image: "1",
+          title: "标题",
+          preview: "预览",
+          typeId: 4,
+          content: "内容",
+        },
+        true,
+        true,
+        (data) => {
+          console.log(data);
+        }
+      );
+    },
     // 打开markdown帮助
     openMarkdownHelp() {
       window.open("/help");

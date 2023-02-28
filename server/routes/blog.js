@@ -3,18 +3,17 @@ const {
     SuccessModel,
     ErrorModel
 } = require("../model/res-model");
+const {
+    exec
+} = require("../db/mysql");
+const sql = require("../db/sql");
 
 router.prefix("/api/blog");
 
 router.get("/list", async(ctx, next) => {
-    ctx.body = new SuccessModel([{
-        id: 0,
-        image: "favicon.ico",
-        time: "2022-00-00 11:11:11",
-        title: "iOS上架流程",
-        preview: "最新的iOS上架流程",
-        type: "iOS",
-    }]);
+    const typeId = ctx.query.typeId;
+    const list = await exec(sql.queryBlogTable(typeId));
+    ctx.body = new SuccessModel(list);
 });
 
 router.get("/detail", async(ctx, next) => {
@@ -31,21 +30,10 @@ router.get("/detail", async(ctx, next) => {
 });
 
 router.post("/add", async(ctx, next) => {
-    const {
-        image,
-        title,
-        preview,
-        typeId,
-        content
-    } = ctx.request.body;
-    ctx.body = new SuccessModel({
-        id: 0,
-        image,
-        title,
-        preview,
-        typeId,
-        content
-    });
+    const body = ctx.request.body;
+    const data = await exec(sql.insertBlogData(body));
+    console.log(data);
+    ctx.body = new SuccessModel("添加成功");
 });
 
 router.post("/update", async(ctx, next) => {

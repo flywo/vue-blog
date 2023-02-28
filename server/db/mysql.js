@@ -7,6 +7,7 @@ const con = mysql.createConnection({
     user: 'root',
     password: 'yuhua',
     port: '3306',
+    timezone: "08:00"
 });
 
 // 连接
