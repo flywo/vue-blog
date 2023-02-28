@@ -1,5 +1,10 @@
 const router = require("koa-router")();
 const jwt = require("jsonwebtoken");
+const {
+    exec,
+    escape
+} = require("../db/mysql");
+const sql = require("../db/sql");
 
 const {
     SuccessModel,
@@ -13,7 +18,8 @@ router.post("/login", async(ctx, next) => {
         username,
         password
     } = ctx.request.body;
-    if (username === "yuhua" && password === "yuhua") {
+    const result = await exec(sql.queryUserData(escape(username), escape(password)));
+    if (result.length !== 0) {
         const token = jwt.sign({
             username
         }, "blog", {

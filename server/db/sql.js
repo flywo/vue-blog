@@ -26,5 +26,7 @@ module.exports = {
     // 删除类型
     deleteTypeData: id => `DELETE FROM type where id = '${id}';`,
     // 更新类型
-    updateTypeData: (id, title) => `UPDATE type SET title = '${title}' WHERE id = '${id}'`,
+    updateTypeData: (id, title) => `UPDATE type SET title = '${title}' WHERE id = '${id}';`,
+    // 查询用户
+    queryUserData: (username, password) => `SELECT * FROM user WHERE username = ${username} and password = ${password}`,
 }
