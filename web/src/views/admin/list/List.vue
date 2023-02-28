@@ -65,7 +65,11 @@
               将文件拖到此处，或<em>点击上传</em>
             </div>
           </el-upload>
-          <el-image class="show-image" :src="imageUrl || ''" fit="cover"></el-image>
+          <el-image
+            class="show-image"
+            :src="imageUrl || ''"
+            fit="cover"
+          ></el-image>
         </div>
         <el-input
           type="textarea"
@@ -146,12 +150,14 @@ export default {
     queryTypeList() {
       get("/type/list", null, false, false, (data) => {
         this.types = data;
+        this.currentType = null;
       });
     },
     // 查询博客列
     queryBlogList() {
       get("/blog/list", null, false, false, (data) => {
         this.blogs = data;
+        this.currentBlog = null;
       });
     },
     // 博客删除弹窗
