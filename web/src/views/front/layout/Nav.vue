@@ -1,7 +1,7 @@
 <template>
   <div class="nav">
     <div class="content">
-      <div class="name" @click="changeToMain">xxxxxx</div>
+      <div class="name" @click="changeToMain">余华的个人博客</div>
       <div class="nav-content" @click="changeCurrent">
         <div class="item" :class="current === 0 ? 'current' : ''">首页</div>
         <div style="width: 20px"></div>
@@ -9,7 +9,7 @@
           分类
           <ul class="sub-menu">
             <li v-for="(item, index) in types" :key="item + index">
-              <div>{{ item }}</div>
+              <div>{{ item.title }}</div>
             </li>
           </ul>
         </div>
@@ -21,13 +21,20 @@
 </template>
 
 <script>
+import { get } from "@/request/request";
+
 export default {
   name: "LayoutNav",
   data() {
     return {
       current: 0,
-      types: ["iOS", "Flutter", "JavaScript", "Vue", "Node.js"],
+      types: [],
     };
+  },
+  mounted() {
+    get("/type/list", {}, false, false, (data) => {
+      this.types = data;
+    });
   },
   methods: {
     changeToMain() {

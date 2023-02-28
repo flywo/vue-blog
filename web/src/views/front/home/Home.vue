@@ -1,5 +1,5 @@
 <template>
-  <div class="back">
+  <div class="home-back">
     <div class="content">
       <div class="list">
         <home-item
@@ -16,6 +16,7 @@
 
 <script>
 import HomeItem from "./Item.vue";
+import { get } from "@/request/request";
 
 export default {
   components: {
@@ -24,88 +25,24 @@ export default {
   name: "FrontHome",
   data() {
     return {
-      list: [
-        {
-          id: 1,
-          image: "favicon.ico",
-          time: "2022-00-00 11:11:11",
-          title: "标题标题标题标题标题标题标题标题标题标题标题",
-          preview:
-            "预览预览预览预览预览预览预览预览预览预览预览预览预览预览预览预览预览预览预览预览预览预览",
-          type: "类别",
-        },
-        {
-          image: "favicon.ico",
-          time: "2022-00-00 11:11:11",
-          title: "标题",
-          preview: "预览",
-          type: "类别",
-        },
-        {
-          image: "favicon.ico",
-          time: "2022-00-00 11:11:11",
-          title: "标题",
-          preview: "预览",
-          type: "类别",
-        },
-        {
-          image: "favicon.ico",
-          time: "2022-00-00 11:11:11",
-          title: "标题",
-          preview: "预览",
-          type: "类别",
-        },
-        {
-          image: "favicon.ico",
-          time: "2022-00-00 11:11:11",
-          title: "标题",
-          preview: "预览",
-          type: "类别",
-        },
-        {
-          image: "favicon.ico",
-          time: "2022-00-00 11:11:11",
-          title: "标题",
-          preview: "预览",
-          type: "类别",
-        },
-        {
-          image: "favicon.ico",
-          time: "2022-00-00 11:11:11",
-          title: "标题",
-          preview: "预览",
-          type: "类别",
-        },
-        {
-          image: "favicon.ico",
-          time: "2022-00-00 11:11:11",
-          title: "标题",
-          preview: "预览",
-          type: "类别",
-        },
-        {
-          image: "favicon.ico",
-          time: "2022-00-00 11:11:11",
-          title: "标题",
-          preview: "预览",
-          type: "类别",
-        },
-        {
-          image: "favicon.ico",
-          time: "2022-00-00 11:11:11",
-          title: "标题",
-          preview: "预览",
-          type: "类别",
-        },
-      ],
+      list: [],
     };
   },
-  methods: {},
+  mounted() {
+    this.queryBlog();
+  },
+  methods: {
+    queryBlog(typeId) {
+      get("/blog/list", typeId ? { typeId } : null, false, false, (data) => {
+        this.list = data;
+      });
+    },
+  },
 };
 </script>
 
 <style lang="scss" scoped>
-.back {
+.home-back {
   .content {
     margin-left: calc((100% - 1000px) / 2);
     width: 1000px;

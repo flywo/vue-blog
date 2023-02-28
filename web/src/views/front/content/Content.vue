@@ -1,15 +1,16 @@
 <template>
   <div class="c-back">
     <div class="content">
-      <div class="time">2022-22-22 11:11:11</div>
-      <h1 class="title">这是一个标题</h1>
-      <markdown-show :content="content"></markdown-show>
+      <div class="time">{{ blog.time }}</div>
+      <h1 class="title">{{ blog.title }}</h1>
+      <markdown-show :content="blog.content"></markdown-show>
     </div>
   </div>
 </template>
 
 <script>
 import MarkdownShow from "@/components/MarkdownShow.vue";
+import { get } from "@/request/request";
 
 export default {
   components: {
@@ -17,10 +18,23 @@ export default {
   },
   data() {
     return {
-      content: "",
+      blog: {},
     };
   },
   name: "BlogContent",
+  mounted() {
+    get(
+      "/blog/detail",
+      {
+        id: this.$route.query.id,
+      },
+      false,
+      false,
+      (data) => {
+        this.blog = data;
+      }
+    );
+  },
 };
 </script>
 

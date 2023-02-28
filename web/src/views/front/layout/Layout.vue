@@ -1,5 +1,5 @@
 <template>
-  <div class="back">
+  <div class="layout-back">
     <div class="layout-nav">
       <nav-view></nav-view>
     </div>
@@ -18,7 +18,7 @@ export default {
 </script>
 
 <style lang="scss" scoped>
-.back {
+.layout-back {
   height: 100%;
   width: 100%;
   .layout-nav {
