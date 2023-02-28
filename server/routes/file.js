@@ -3,6 +3,13 @@ const {
     koaBody
 } = require("koa-body")
 const fs = require("fs");
+const {
+    removeNoUseImage
+} = require("../utils/tool");
+const {
+    exec
+} = require("../db/mysql");
+const sql = require("../db/sql");
 
 const {
     SuccessModel,
@@ -37,6 +44,12 @@ router.post("/delete", async(ctx, next) => {
             }
         });
     });
+});
+
+router.get("/clear", async(ctx, next) => {
+    const list = await exec(sql.queryBlogTable());
+    removeNoUseImage(list);
+    ctx.body = new SuccessModel("清理成功");
 });
 
 module.exports = router;

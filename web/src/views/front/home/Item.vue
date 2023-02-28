@@ -5,7 +5,9 @@
     </div>
     <div class="time">{{ options.time }}</div>
     <div class="type-back">
-      <a href="#" @click="jumpType">{{ options.typeName }}</a>
+      <a href="#" @click="jumpType($event, { id: options.typeId })">{{
+        options.typeName
+      }}</a>
     </div>
     <h1 class="title">
       <a href="#" @click="jumpBlog($event, options.id)">{{ options.title }}</a>
@@ -21,9 +23,9 @@ export default {
   props: ["options"],
   name: "HomeItem",
   methods: {
-    jumpType(event) {
+    jumpType(event, type) {
       event.preventDefault();
-      console.log(event);
+      this.$bus.$emit("changeToType", type);
     },
     jumpBlog(event, id) {
       event.preventDefault();

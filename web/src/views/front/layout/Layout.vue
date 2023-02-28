@@ -3,7 +3,7 @@
     <div class="layout-nav">
       <nav-view></nav-view>
     </div>
-    <router-view></router-view>
+    <router-view :key="$route.path + $route.query.typeId"></router-view>
   </div>
 </template>
 

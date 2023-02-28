@@ -29,7 +29,7 @@ export default {
     };
   },
   mounted() {
-    this.queryBlog();
+    this.queryBlog(this.$route.query.typeId);
   },
   methods: {
     queryBlog(typeId) {

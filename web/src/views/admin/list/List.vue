@@ -96,6 +96,7 @@
       </div>
     </div>
     <div class="help" @click="openMarkdownHelp">Markdown帮助</div>
+    <div class="clear" @click="clearNoUseImage">清理无用图片</div>
   </div>
 </template>
 
@@ -264,6 +265,9 @@ export default {
     // 打开markdown帮助
     openMarkdownHelp() {
       window.open("/help");
+    },
+    clearNoUseImage() {
+      get("/file/clear", null, true, true);
     },
     // 上传图片
     uploadImage(event) {
@@ -437,13 +441,17 @@ export default {
       }
     }
   }
-  .help {
+  .help,
+  .clear {
     position: fixed;
     top: 10px;
     right: 10px;
     color: #999;
     cursor: pointer;
     font-size: 16px;
+  }
+  .clear {
+    top: 40px;
   }
 }
 </style>

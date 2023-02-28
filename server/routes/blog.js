@@ -7,14 +7,12 @@ const {
     exec
 } = require("../db/mysql");
 const sql = require("../db/sql");
-const { removeNoUseImage } = require("../utils/tool");
 
 router.prefix("/api/blog");
 
 router.get("/list", async(ctx, next) => {
     const typeId = ctx.query.typeId;
     const list = await exec(sql.queryBlogTable(typeId));
-    removeNoUseImage(list);
     ctx.body = new SuccessModel(list);
 });
 

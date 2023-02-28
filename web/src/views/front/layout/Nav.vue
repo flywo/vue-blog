@@ -8,7 +8,11 @@
         <div class="item more" :class="current === 1 ? 'current' : ''">
           分类
           <ul class="sub-menu">
-            <li v-for="(item, index) in types" :key="item + index">
+            <li
+              v-for="(item, index) in types"
+              :key="item + index"
+              @click="changeToType(item)"
+            >
               <div>{{ item.title }}</div>
             </li>
           </ul>
@@ -35,23 +39,37 @@ export default {
     get("/type/list", {}, false, false, (data) => {
       this.types = data;
     });
+    this.$bus.$on("changeToType", (type) => {
+      this.changeToType(type);
+    });
+    if (this.$route.query.typeId) {
+      this.current = 1;
+    }
+  },
+  beforeDestroy() {
+    this.$bus.$off("changeToType");
   },
   methods: {
+    changeToType(type) {
+      this.current = 1;
+      this.$router.push({
+        path: "/home",
+        query: {
+          typeId: type.id,
+        },
+      });
+    },
     changeToMain() {
-      if (this.$route.path !== "/home") {
-        this.current = 0;
-        this.$router.push("/home");
-      }
+      this.current = 0;
+      this.$router.push("/home");
     },
     changeCurrent(event) {
       const name = event.target.innerText;
       if (name === "首页") {
         this.changeToMain();
       } else if (name === "关于我") {
-        if (this.$route.path !== "/me") {
-          this.current = 2;
-          this.$router.push("/me");
-        }
+        this.current = 2;
+        this.$router.push("/me");
       }
     },
   },
