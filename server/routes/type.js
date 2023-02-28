@@ -3,31 +3,25 @@ const {
     SuccessModel,
     ErrorModel
 } = require("../model/res-model");
+const {
+    exec
+} = require("../db/mysql");
+const sql = require("../db/sql");
 
 router.prefix("/api/type");
 
 router.get("/list", async(ctx, next) => {
-    ctx.body = new SuccessModel([{
-        id: 0,
-        title: "iOS",
-    }, {
-        id: 1,
-        title: "Flutter",
-    }, {
-        id: 2,
-        title: "JavaScript",
-    }, {
-        id: 3,
-        title: "Vue",
-    }, {
-        id: 4,
-        title: "Node.js",
-    }]);
+    const list = await exec(sql.queryTypeTable);
+    ctx.body = new SuccessModel(list);
 });
 
 router.post("/add", async(ctx, next) => {
     const title = ctx.request.body.title;
-    ctx.body = new SuccessModel("添加成功:" + title);
+    const data = await exec(sql.insertTypeData(title));
+    ctx.body = new SuccessModel({
+        id: data.insertId,
+        title
+    });
 });
 
 router.post("/update", async(ctx, next) => {
@@ -35,12 +29,14 @@ router.post("/update", async(ctx, next) => {
         id,
         title
     } = ctx.request.body;
-    ctx.body = new SuccessModel("编辑成功:" + id + " " + title);
+    await exec(sql.updateTypeData(id, title))
+    ctx.body = new SuccessModel("编辑成功");
 })
 
 router.post("/delete", async(ctx, next) => {
     const id = ctx.request.body.id;
-    ctx.body = new SuccessModel("删除成功:" + id);
+    await exec(sql.deleteTypeData(id))
+    ctx.body = new SuccessModel("删除成功");
 })
 
 module.exports = router;

@@ -19,4 +19,12 @@ module.exports = {
         type_id INT NOT NULL,
         CONSTRAINT fk_blog_type_id FOREIGN KEY (type_id) REFERENCES type(id)
     );`,
+    // 查询类型列表
+    queryTypeTable: `SELECT * FROM type`,
+    // 插入类型数据
+    insertTypeData: title => `INSERT INTO type (title) VALUES ('${title}');`,
+    // 删除类型
+    deleteTypeData: id => `DELETE FROM type where id = '${id}';`,
+    // 更新类型
+    updateTypeData: (id, title) => `UPDATE type SET title = '${title}' WHERE id = '${id}'`,
 }

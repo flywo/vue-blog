@@ -1,7 +1,7 @@
 <template>
   <div class="l-back">
     <div class="type-list">
-      <div class="add">新建分类</div>
+      <div class="add" @click="showTypeAdd()">新建分类</div>
       <ul>
         <li
           v-for="(item, index) in types"
@@ -9,12 +9,12 @@
           :class="index === currentType ? 'type-current' : ''"
           @click="changeType(index)"
         >
-          {{ item }}
+          {{ item.title }}
           <i
             class="el-icon-delete-solid more"
-            @click.stop="deleteType(index)"
+            @click.stop="showTypeDelete(item)"
           ></i>
-          <i class="el-icon-s-tools more" @click.stop="editType(index)"></i>
+          <i class="el-icon-s-tools more" @click.stop="showTypeAdd(item)"></i>
         </li>
       </ul>
     </div>
@@ -93,7 +93,7 @@
 
 <script>
 import MarkdownShow from "@/components/MarkdownShow.vue";
-import { upload, post } from "@/request/request";
+import { upload, post, get } from "@/request/request";
 
 export default {
   name: "AdminList",
@@ -102,7 +102,7 @@ export default {
   },
   data() {
     return {
-      types: ["1", "2"],
+      types: [],
       currentType: 0,
       blogs: [
         {
@@ -125,15 +125,78 @@ export default {
       editContent: "",
     };
   },
+  mounted() {
+    this.queryTypeList();
+  },
   methods: {
+    // 改变类型
     changeType(index) {
       this.currentType = index;
     },
+    // 查询类型
+    queryTypeList() {
+      get("/type/list", null, false, false, (data) => {
+        this.types = data;
+      });
+    },
+    // 类型删除弹窗
+    showTypeDelete(type) {
+      this.$confirm(
+        "此操作将永久删除该类型，删除之前请先清空或移动博客列表, 是否继续?",
+        "提示",
+        {
+          confirmButtonText: "确定",
+          cancelButtonText: "取消",
+          type: "warning",
+        }
+      )
+        .then(() => {
+          post("/type/delete", null, { id: type.id }, true, true, () => {
+            this.queryTypeList();
+          });
+        })
+        .catch(() => {});
+    },
+    // 类型添加弹窗
+    showTypeAdd(item) {
+      this.$prompt("请输入类型名称", "提示", {
+        confirmButtonText: "确定",
+        cancelButtonText: "取消",
+        inputPlaceholder: "类型名称",
+        inputValue: item ? item.title : null,
+        inputValidator: (value) => {
+          if (!value) {
+            return "请输入类型名称！";
+          } else if (value.length > 10) {
+            return "类型长度请勿超过10个字符！";
+          }
+          return true;
+        },
+      })
+        .then(({ value }) => {
+          post(
+            item ? "/type/update" : "/type/add",
+            null,
+            {
+              title: value,
+              id: item ? item.id : null,
+            },
+            true,
+            true,
+            () => {
+              this.queryTypeList();
+            }
+          );
+        })
+        .catch(() => {});
+    },
     deleteType() {},
     editType() {},
+    // 打开markdown帮助
     openMarkdownHelp() {
       window.open("/help");
     },
+    // 上传图片
     uploadImage(event) {
       if (this.imageUrl) {
         post(
