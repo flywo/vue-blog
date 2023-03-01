@@ -45,6 +45,9 @@ export default {
     if (this.$route.query.typeId) {
       this.current = 1;
     }
+    if (this.$route.path === "/me") {
+      this.current = 2;
+    }
   },
   beforeDestroy() {
     this.$bus.$off("changeToType");
