@@ -15,7 +15,7 @@
 http://www.yuhua.pub
 
 # 博客预览
-![image](https://github.com/flywo/blog/blob/master/1.png)
-![image](https://github.com/flywo/blog/blob/master/2.png)
-![image](https://github.com/flywo/blog/blob/master/3.png)
-![image](https://github.com/flywo/blog/blob/master/4.png)
+![image](https://github.com/flywo/blog/blob/master/img/1.png)
+![image](https://github.com/flywo/blog/blob/master/img/2.png)
+![image](https://github.com/flywo/blog/blob/master/img/3.png)
+![image](https://github.com/flywo/blog/blob/master/img/4.png)
