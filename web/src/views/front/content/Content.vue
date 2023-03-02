@@ -3,6 +3,9 @@
     <div class="content">
       <div class="time">{{ blog.time }}</div>
       <h1 class="title">{{ blog.title }}</h1>
+      <p class="preview">
+        {{ blog.preview }}
+      </p>
       <markdown-show :content="blog.content || ''"></markdown-show>
     </div>
   </div>
@@ -61,6 +64,12 @@ export default {
       font-family: "Montserrat", sans-serif;
       letter-spacing: 0.6px;
       color: #222;
+    }
+    .preview {
+      padding: 10px;
+      margin-bottom: 20px;
+      border-left: 2px solid var(--bg-green);
+      word-wrap: break-word;
     }
   }
 }
