@@ -432,6 +432,7 @@ export default {
     }
     .right {
       padding: 20px;
+      overflow-y: auto;
       .title {
         font-size: 40px;
         line-height: 1.3;

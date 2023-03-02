@@ -4,6 +4,9 @@
       <nav-view></nav-view>
     </div>
     <router-view :key="$route.path + $route.query.typeId"></router-view>
+    <div class="bottom">
+      <p>蜀ICP备19041988号-1</p>
+    </div>
   </div>
 </template>
 
@@ -23,6 +26,19 @@ export default {
   width: 100%;
   .layout-nav {
     height: 120px;
+  }
+  .bottom {
+    position: fixed;
+    height: 20px;
+    width: 100%;
+    bottom: 0;
+    background-color: #6ae79244;
+    display: flex;
+    p {
+      margin: auto;
+      color: #666;
+      font-size: 14px;
+    }
   }
 }
 </style>
