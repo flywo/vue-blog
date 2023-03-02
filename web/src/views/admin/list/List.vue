@@ -42,7 +42,7 @@
           type="text"
           placeholder="请输入标题"
           v-model="editTitle"
-          maxlength="20"
+          maxlength="50"
           show-word-limit
           clearable
         >

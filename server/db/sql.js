@@ -14,7 +14,7 @@ module.exports = {
         id INT AUTO_INCREMENT PRIMARY KEY,
         image VARCHAR(100) NOT NULL,
         time DATETIME NOT NULL DEFAULT CURRENT_TIMESTAMP,
-        title VARCHAR(20) NOT NULL,
+        title VARCHAR(50) NOT NULL,
         preview VARCHAR(50) NOT NULL,
         content TEXT NOT NULL,
         type_id INT NOT NULL,
