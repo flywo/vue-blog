@@ -27,6 +27,12 @@ const routes = [
                 path: "/me",
                 component: () =>
                     import ("@/views/front/me/Me.vue")
+            },
+            // 关于博客
+            {
+                path: "/blog",
+                component: () =>
+                    import ("@/views/front/blog/Blog.vue")
             }
         ]
     },

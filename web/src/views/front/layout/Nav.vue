@@ -19,6 +19,7 @@
         </div>
         <div style="width: 20px"></div>
         <div class="item" :class="current === 2 ? 'current' : ''">关于我</div>
+        <div class="item" :class="current === 3 ? 'current' : ''">关于博客</div>
       </div>
     </div>
   </div>
@@ -47,6 +48,8 @@ export default {
     }
     if (this.$route.path === "/me") {
       this.current = 2;
+    } else if (this.$route.path === "/blog") {
+      this.current = 3;
     }
   },
   beforeDestroy() {
@@ -73,6 +76,9 @@ export default {
       } else if (name === "关于我") {
         this.current = 2;
         this.$router.push("/me");
+      } else if (name === "关于博客") {
+        this.current = 3;
+        this.$router.push("/blog");
       }
     },
   },
