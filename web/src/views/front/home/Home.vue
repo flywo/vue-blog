@@ -44,14 +44,44 @@ export default {
 <style lang="scss" scoped>
 .home-back {
   .content {
-    margin-left: calc((100% - 1000px) / 2);
-    width: 1000px;
     padding-bottom: 20px;
     .list {
       width: 100%;
       display: grid;
-      grid-template-columns: repeat(3, 1fr);
       gap: 20px;
+    }
+  }
+}
+@media only screen and (min-width: 1020px) {
+  .home-back {
+    .content {
+      margin-left: calc((100% - var(--big-screen-min-width)) / 2);
+      width: var(--big-screen-min-width);
+      .list {
+        grid-template-columns: repeat(3, 1fr);
+      }
+    }
+  }
+}
+
+@media only screen and (max-width: 1020px) {
+  .home-back {
+    .content {
+      margin-left: 20px;
+      width: calc(100% - 40px);
+      .list {
+        grid-template-columns: repeat(2, 1fr);
+      }
+    }
+  }
+}
+
+@media only screen and (max-width: 620px) {
+  .home-back {
+    .content {
+      .list {
+        grid-template-columns: repeat(1, 1fr);
+      }
     }
   }
 }

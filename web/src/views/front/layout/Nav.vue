@@ -19,6 +19,7 @@
         </div>
         <div style="width: 20px"></div>
         <div class="item" :class="current === 2 ? 'current' : ''">关于我</div>
+        <div style="width: 20px"></div>
         <div class="item" :class="current === 3 ? 'current' : ''">关于博客</div>
       </div>
     </div>
@@ -92,7 +93,6 @@ export default {
   display: flex;
   justify-content: center;
   .content {
-    width: 1000px;
     height: 100%;
     display: flex;
     align-items: center;
@@ -194,6 +194,32 @@ export default {
         right: -5px;
         top: 18px;
         z-index: 5;
+      }
+    }
+  }
+}
+@media only screen and (min-width: 1020px) {
+  .nav {
+    .content {
+      width: var(--big-screen-min-width);
+    }
+  }
+}
+
+@media only screen and (max-width: 1020px) {
+  .nav {
+    .content {
+      width: 100%;
+      padding-inline: 20px;
+    }
+  }
+}
+
+@media only screen and (max-width: 720px) {
+  .nav {
+    .content {
+      .nav-content {
+        display: none;
       }
     }
   }

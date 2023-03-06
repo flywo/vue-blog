@@ -45,8 +45,6 @@ export default {
 .b-back {
   padding-bottom: 20px;
   .content {
-    margin-left: calc((100% - 1000px) / 2);
-    width: 1000px;
     -webkit-box-shadow: 0px 0px 6px 0px rgba(0, 0, 0, 0.15);
     box-shadow: 0px 0px 6px 0px rgba(0, 0, 0, 0.15);
     background: #fff;
@@ -78,6 +76,23 @@ export default {
         line-height: 40px;
         text-align: center;
       }
+    }
+  }
+}
+@media only screen and (min-width: 1020px) {
+  .b-back {
+    .content {
+      margin-left: calc((100% - var(--big-screen-min-width)) / 2);
+      width: var(--big-screen-min-width);
+    }
+  }
+}
+
+@media only screen and (max-width: 1020px) {
+  .b-back {
+    .content {
+      margin-left: 20px;
+      width: calc(100% - 40px);
     }
   }
 }
