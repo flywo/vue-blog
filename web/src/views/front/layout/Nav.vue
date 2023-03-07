@@ -13,7 +13,13 @@
               :key="item + index"
               @click="changeToType(item)"
             >
-              <div>{{ item.title }}</div>
+              <div
+                :class="
+                  current === 1 && typeIndex === index ? 'current-type' : ''
+                "
+              >
+                {{ item.title }}
+              </div>
             </li>
           </ul>
         </div>
@@ -34,6 +40,7 @@
       <el-menu
         :default-active="current === 1 ? '1-' + typeIndex : current.toString()"
         :default-openeds="current === 1 ? ['1'] : []"
+        @select="selectMenu"
       >
         <el-menu-item index="0">
           <span slot="title">首页</span>
@@ -98,6 +105,21 @@ export default {
     this.$bus.$off("changeToType");
   },
   methods: {
+    selectMenu(index) {
+      if (index.indexOf("-") !== -1) {
+        this.changeToType(this.types[parseInt(index.split("-")[1])]);
+      } else {
+        if (index === "0") {
+          this.changeToMain();
+        } else if (index === "2") {
+          this.current = 2;
+          this.$router.push("/me");
+        } else if (index === "3") {
+          this.current = 3;
+          this.$router.push("/blog");
+        }
+      }
+    },
     tidyTypeIndex(types, typeId) {
       types.forEach((item, index) => {
         if (item.id === typeId) {
@@ -217,6 +239,9 @@ export default {
               font-size: 14px;
               font-weight: 500;
               color: #333;
+            }
+            .current-type {
+              color: var(--bg-green);
             }
           }
           li:hover {
