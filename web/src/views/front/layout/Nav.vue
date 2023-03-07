@@ -22,7 +22,39 @@
         <div style="width: 20px"></div>
         <div class="item" :class="current === 3 ? 'current' : ''">关于博客</div>
       </div>
+      <i class="nav-icon el-icon-s-fold" @click="showDrawer = true"></i>
     </div>
+    <el-drawer
+      title="余华的个人博客"
+      :visible.sync="showDrawer"
+      direction="rtl"
+      :destroy-on-close="true"
+      size="40%"
+    >
+      <el-menu
+        :default-active="current === 1 ? '1-' + typeIndex : current.toString()"
+        :default-openeds="current === 1 ? ['1'] : []"
+      >
+        <el-menu-item index="0">
+          <span slot="title">首页</span>
+        </el-menu-item>
+        <el-submenu index="1">
+          <span slot="title">分类</span>
+          <el-menu-item
+            v-for="(item, index) in types"
+            :key="'drawer-type-' + index"
+            :index="'1-' + index"
+            >{{ item.title }}</el-menu-item
+          >
+        </el-submenu>
+        <el-menu-item index="2">
+          <span slot="title">关于我</span>
+        </el-menu-item>
+        <el-menu-item index="3">
+          <span slot="title">关于博客</span>
+        </el-menu-item>
+      </el-menu>
+    </el-drawer>
   </div>
 </template>
 
@@ -35,7 +67,16 @@ export default {
     return {
       current: 0,
       types: [],
+      showDrawer: false,
+      typeIndex: 0,
     };
+  },
+  watch: {
+    types(value) {
+      if (this.$route.query.typeId) {
+        this.tidyTypeIndex(value, this.$route.query.typeId);
+      }
+    },
   },
   mounted() {
     get("/type/list", {}, false, false, (data) => {
@@ -57,7 +98,15 @@ export default {
     this.$bus.$off("changeToType");
   },
   methods: {
+    tidyTypeIndex(types, typeId) {
+      types.forEach((item, index) => {
+        if (item.id === typeId) {
+          this.typeIndex = index;
+        }
+      });
+    },
     changeToType(type) {
+      this.tidyTypeIndex(this.types, type.id);
       this.current = 1;
       this.$router.push({
         path: "/home",
@@ -97,6 +146,7 @@ export default {
     display: flex;
     align-items: center;
     justify-content: space-between;
+    position: relative;
     .name {
       color: var(--text-black);
       font-weight: bold;
@@ -196,6 +246,12 @@ export default {
         z-index: 5;
       }
     }
+    .nav-icon {
+      position: absolute;
+      top: 45px;
+      right: 10px;
+      font-size: 30px;
+    }
   }
 }
 @media only screen and (min-width: 1020px) {
@@ -215,11 +271,24 @@ export default {
   }
 }
 
+@media only screen and (min-width: 720px) {
+  .nav {
+    .content {
+      .nav-icon {
+        opacity: 0;
+      }
+    }
+  }
+}
+
 @media only screen and (max-width: 720px) {
   .nav {
     .content {
       .nav-content {
         display: none;
+      }
+      .nav-icon {
+        opacity: 1;
       }
     }
   }
