@@ -1,6 +1,6 @@
 <template>
   <div class="home-back">
-    <div class="content">
+    <div class="content" v-loading="loading">
       <div class="list">
         <home-item
           class="item"
@@ -10,6 +10,7 @@
         >
         </home-item>
       </div>
+      <el-empty v-if="list.length === 0" description="当前没有内容"></el-empty>
     </div>
   </div>
 </template>
@@ -26,6 +27,7 @@ export default {
   data() {
     return {
       list: [],
+      loading: true,
     };
   },
   mounted() {
@@ -33,9 +35,19 @@ export default {
   },
   methods: {
     queryBlog(typeId) {
-      get("/blog/list", typeId ? { typeId } : null, false, false, (data) => {
-        this.list = data;
-      });
+      get(
+        "/blog/list",
+        typeId ? { typeId } : null,
+        false,
+        false,
+        (data) => {
+          this.loading = false;
+          this.list = data;
+        },
+        () => {
+          this.loading = false;
+        }
+      );
     },
   },
 };

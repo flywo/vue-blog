@@ -1,6 +1,6 @@
 <template>
   <div class="c-back">
-    <div class="content">
+    <div class="content" v-loading="loading">
       <div class="time">{{ blog.time }}</div>
       <h1 class="title">{{ blog.title }}</h1>
       <p class="preview">
@@ -22,6 +22,7 @@ export default {
   data() {
     return {
       blog: {},
+      loading: true,
     };
   },
   name: "BlogContent",
@@ -34,7 +35,11 @@ export default {
       false,
       false,
       (data) => {
+        this.loading = false;
         this.blog = data;
+      },
+      () => {
+        this.loading = false;
       }
     );
   },
