@@ -114,6 +114,7 @@ export default {
       types: [],
       currentType: null,
       blogs: [],
+      rawBlogs: [],
       currentBlog: null,
       editTitle: "",
       imageUrl: "",
@@ -137,6 +138,8 @@ export default {
     // 改变类型
     changeType(index) {
       this.currentType = index;
+      this.blogs = this.rawBlogs.filter(blog => blog.typeId === this.types[index].id);
+      this.addNewBlog();
     },
     // 改变博客
     changeBlog(index) {
@@ -146,6 +149,11 @@ export default {
       this.imageUrl = blog.image;
       this.editPreview = blog.preview;
       this.editContent = blog.content;
+      this.types.forEach((type, index) => {
+        if (type.id === blog.typeId) {
+          this.currentType = index;
+        }
+      });
       get(
         "/blog/detail",
         {
@@ -168,6 +176,7 @@ export default {
     // 查询博客列
     queryBlogList() {
       get("/blog/list", null, false, false, (data) => {
+        this.rawBlogs = data;
         this.blogs = data;
         this.currentBlog = null;
       });
