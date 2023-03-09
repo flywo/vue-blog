@@ -56,6 +56,7 @@ export default {
     border-radius: 15px;
     box-sizing: border-box;
     padding: 20px;
+    transition: all 0.3s ease-out;
     .time {
       text-transform: capitalize;
       color: #333;

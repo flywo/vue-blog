@@ -198,6 +198,7 @@ export default {
     box-sizing: border-box;
     padding: 20px;
     position: relative;
+    transition: all 0.3s ease-out;
     .title {
       strong {
         font-size: 50px;

@@ -169,6 +169,7 @@ export default {
     align-items: center;
     justify-content: space-between;
     position: relative;
+    transition: all 0.3s ease-out;
     .name {
       color: var(--text-black);
       font-weight: bold;
@@ -180,6 +181,7 @@ export default {
     }
     .nav-content {
       display: flex;
+      transition: all 0.3s ease-out;
       .item {
         padding: 20px 10px;
         font-family: "Montserrat", sans-serif;
@@ -276,6 +278,7 @@ export default {
       top: 45px;
       right: 10px;
       font-size: 30px;
+      transition: all 0.3s ease-out;
     }
   }
 }
@@ -300,7 +303,7 @@ export default {
   .nav {
     .content {
       .nav-icon {
-        opacity: 0;
+        visibility: hidden;
       }
     }
   }
@@ -313,7 +316,7 @@ export default {
         display: none;
       }
       .nav-icon {
-        opacity: 1;
+        visibility: visible;
       }
     }
   }

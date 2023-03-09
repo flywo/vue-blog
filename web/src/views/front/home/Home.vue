@@ -57,10 +57,12 @@ export default {
 .home-back {
   .content {
     padding-bottom: 20px;
+    transition: all 0.3s ease-out;
     .list {
       width: 100%;
       display: grid;
       gap: 20px;
+      transition: all 0.3s ease-out;
     }
   }
 }
