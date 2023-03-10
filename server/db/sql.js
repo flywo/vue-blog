@@ -36,12 +36,12 @@ module.exports = {
         let sql = `SELECT blog.id, blog.image, blog.title, blog.preview, blog.time, type.id typeId, type.title typeName 
         FROM blog, type WHERE 1=1`
         if (typeId) {
-            sql += ` AND type_id = '${typeId}'`
+            sql += ` AND type_id = ${typeId}`
         }
         return sql + " AND blog.type_id = type.id ORDER BY time DESC;"
     },
     // 查询单个博客
-    querySingleBlog: (id) => `SELECT * FROM blog WHERE id = '${id}';`,
+    querySingleBlog: (id) => `SELECT * FROM blog WHERE id = ${id};`,
     // 插入博客
     insertBlogData: (blog) => `INSERT INTO blog (image, title, preview, content, type_id) 
     VALUES ('${blog.image}', '${blog.title}', '${blog.preview}', ${blog.content}, '${blog.typeId}');`,
