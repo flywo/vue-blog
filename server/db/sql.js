@@ -44,9 +44,10 @@ module.exports = {
     querySingleBlog: (id) => `SELECT * FROM blog WHERE id = '${id}';`,
     // 插入博客
     insertBlogData: (blog) => `INSERT INTO blog (image, title, preview, content, type_id) 
-    VALUES ('${blog.image}', '${blog.title}', '${blog.preview}', '${blog.content}', '${blog.typeId}');`,
+    VALUES ('${blog.image}', '${blog.title}', '${blog.preview}', ${blog.content}, '${blog.typeId}');`,
     // 删除博客
     deleteBlogData: id => `DELETE FROM blog where id = '${id}';`,
-    updateBlogData: (blog) => `UPDATE blog SET image = '${blog.image}', preview = '${blog.preview}', title = '${blog.title}', content = '${blog.content}', type_id = '${blog.typeId}'
+    // 更新博客
+    updateBlogData: (blog) => `UPDATE blog SET image = '${blog.image}', preview = '${blog.preview}', title = '${blog.title}', content = ${blog.content}, type_id = '${blog.typeId}'
     WHERE id = '${blog.id}'`,
 }

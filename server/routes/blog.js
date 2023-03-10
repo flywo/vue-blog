@@ -4,20 +4,21 @@ const {
     ErrorModel
 } = require("../model/res-model");
 const {
-    exec
+    exec,
+    escape
 } = require("../db/mysql");
 const sql = require("../db/sql");
 
 router.prefix("/api/blog");
 
 router.get("/list", async(ctx, next) => {
-    const typeId = ctx.query.typeId;
+    const typeId = ctx.query.typeId ? escape(ctx.query.typeId) : null;
     const list = await exec(sql.queryBlogTable(typeId));
     ctx.body = new SuccessModel(list);
 });
 
 router.get("/detail", async(ctx, next) => {
-    const id = ctx.query.id;
+    const id = escape(ctx.query.id);
     const list = await exec(sql.querySingleBlog(id));
     if (list.length > 0) {
         ctx.body = new SuccessModel(list[0]);
@@ -28,6 +29,7 @@ router.get("/detail", async(ctx, next) => {
 
 router.post("/add", async(ctx, next) => {
     const body = ctx.request.body;
+    body.content = escape(body.content);
     const data = await exec(sql.insertBlogData(body));
     ctx.body = new SuccessModel({
         id: data.insertId
@@ -36,6 +38,7 @@ router.post("/add", async(ctx, next) => {
 
 router.post("/update", async(ctx, next) => {
     const body = ctx.request.body;
+    body.content = escape(body.content);
     const data = await exec(sql.updateBlogData(body));
     ctx.body = new SuccessModel("编辑成功");
 })
