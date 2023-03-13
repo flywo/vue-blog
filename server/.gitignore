@@ -26,3 +26,5 @@ lerna-debug.log
 .vscode
 
 *.sh
+
+config/

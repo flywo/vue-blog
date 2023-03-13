@@ -1,12 +1,10 @@
 const mysql = require("mysql");
 const sql = require("./sql");
+const config = require("../config/config");
 
 // 创建
 const con = mysql.createConnection({
-    host: 'localhost',
-    user: 'root',
-    password: 'yuhua',
-    port: '3306',
+    ...config.mysql,
     multipleStatements: true,
     timezone: "08:00"
 });
