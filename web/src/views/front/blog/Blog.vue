@@ -1,6 +1,6 @@
 <template>
   <div class="b-back">
-    <div class="content">
+    <div class="content content-common">
       <markdown-show :content="content"></markdown-show>
       <div class="contact">
         <el-image
@@ -45,14 +45,7 @@ export default {
 .b-back {
   padding-bottom: 20px;
   .content {
-    -webkit-box-shadow: 0px 0px 6px 0px rgba(0, 0, 0, 0.15);
-    box-shadow: 0px 0px 6px 0px rgba(0, 0, 0, 0.15);
-    background: #fff;
-    border-radius: 15px;
-    box-sizing: border-box;
-    padding: 20px;
     position: relative;
-    transition: all 0.3s ease-out;
     .contact {
       position: absolute;
       top: 5px;

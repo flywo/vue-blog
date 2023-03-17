@@ -1,0 +1,98 @@
+<template>
+  <div class="scene-container"></div>
+</template>
+
+<script>
+import * as THREE from "three";
+import { OrbitControls } from "three/examples/jsm/controls/OrbitControls.js";
+export default {
+  name: "BlogView",
+  mounted() {
+    // 拿到容器
+    const container = document.querySelector(".scene-container");
+
+    // 创建场景
+    const scene = new THREE.Scene();
+    // 场景背景色
+    scene.background = new THREE.Color("black");
+
+    // 相机角度
+    const fov = 35;
+    // 宽高比
+    const aspect = container.clientWidth / container.clientHeight;
+    // 相机近焦
+    const near = 0.1;
+    // 相机远焦
+    const far = 100;
+    // 场景相机
+    const camera = new THREE.PerspectiveCamera(fov, aspect, near, far);
+    // 相机位置
+    camera.position.set(0, 0, 10);
+    // 相机添加到场景
+    scene.add(camera);
+
+    // 盒子几何体
+    const geometry = new THREE.BoxGeometry(2, 2, 2);
+    // 盒子材质
+    const material = new THREE.MeshBasicMaterial();
+    // 创建盒子物体
+    const cube = new THREE.Mesh(geometry, material);
+    // 添加到场景
+    scene.add(cube);
+
+    // 渲染器
+    const render = new THREE.WebGLRenderer();
+    // 渲染器大小
+    render.setSize(container.clientWidth, container.clientHeight);
+    // 渲染器像素比
+    render.setPixelRatio(window.devicePixelRatio);
+    // 添加到页面
+    container.append(render.domElement);
+
+    // 控制器
+    const controls = new OrbitControls(camera, render.domElement);
+    // 阻尼
+    controls.enableDamping = true;
+
+    // 辅助线
+    const axes = new THREE.AxesHelper(5);
+    // 添加
+    scene.add(axes);
+
+    // 渲染函数
+    function renderMethod() {
+      // 更新控制器
+      controls.update();
+      // 渲染
+      render.render(scene, camera);
+      // 每一帧都调用渲染函数
+      requestAnimationFrame(renderMethod);
+    }
+    // 渲染
+    renderMethod();
+
+    // 界面变化
+    window.addEventListener("resize", () => {
+      // 拿到容器
+      const container = document.querySelector(".scene-container");
+      // 更新相机宽高比
+      camera.aspect = container.clientWidth / container.clientHeight;
+      // 更新相机矩阵
+      camera.updateProjectionMatrix();
+      // 更新渲染器大小
+      render.setSize(container.clientWidth, container.clientHeight);
+      // 更新像素比
+      render.setPixelRatio(window.devicePixelRatio);
+    });
+  },
+};
+</script>
+
+<style lang="scss" scoped>
+.scene-container {
+  margin-top: 10px;
+  height: 600px;
+  width: 100%;
+  flex-grow: 1;
+}
+</style>

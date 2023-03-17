@@ -1,12 +1,13 @@
 <template>
   <div class="c-back">
-    <div class="content" v-loading="loading">
+    <div class="content content-common" v-loading="loading">
       <div class="time">{{ blog.time }}</div>
       <h1 class="title">{{ blog.title }}</h1>
       <p class="preview">
         {{ blog.preview }}
       </p>
       <markdown-show :content="blog.content || ''"></markdown-show>
+      <router-view></router-view>
     </div>
   </div>
 </template>
@@ -50,13 +51,6 @@ export default {
 .c-back {
   padding-bottom: 20px;
   .content {
-    -webkit-box-shadow: 0px 0px 6px 0px rgba(0, 0, 0, 0.15);
-    box-shadow: 0px 0px 6px 0px rgba(0, 0, 0, 0.15);
-    background: #fff;
-    border-radius: 15px;
-    box-sizing: border-box;
-    padding: 20px;
-    transition: all 0.3s ease-out;
     .time {
       text-transform: capitalize;
       color: #333;

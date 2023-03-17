@@ -20,7 +20,15 @@ const routes = [
             {
                 path: "/content",
                 component: () =>
-                    import ("@/views/front/content/Content.vue")
+                    import ("@/views/front/content/Content.vue"),
+                children: [
+                    // three.js
+                    {
+                        path: "/threejs1",
+                        component: () =>
+                            import ("@/views/front/threejs/blog1.vue")
+                    }
+                ]
             },
             // 关于我
             {

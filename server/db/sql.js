@@ -18,6 +18,7 @@ module.exports = {
         preview VARCHAR(50) NOT NULL,
         content TEXT NOT NULL,
         type_id INT NOT NULL,
+        path VARCHAR(50) NOT NULL,
         CONSTRAINT fk_blog_type_id FOREIGN KEY (type_id) REFERENCES type(id)
     );
     `,
@@ -33,7 +34,7 @@ module.exports = {
     queryUserData: (username, password) => `SELECT * FROM user WHERE username = ${username} and password = ${password}`,
     // 查询博客列表
     queryBlogTable: (typeId) => {
-        let sql = `SELECT blog.id, blog.image, blog.title, blog.preview, blog.time, type.id typeId, type.title typeName 
+        let sql = `SELECT blog.id, blog.image, blog.title, blog.preview, blog.time, blog.path, type.id typeId, type.title typeName 
         FROM blog, type WHERE 1=1`
         if (typeId) {
             sql += ` AND type_id = ${typeId}`
@@ -43,11 +44,11 @@ module.exports = {
     // 查询单个博客
     querySingleBlog: (id) => `SELECT * FROM blog WHERE id = ${id};`,
     // 插入博客
-    insertBlogData: (blog) => `INSERT INTO blog (image, title, preview, content, type_id) 
-    VALUES ('${blog.image}', '${blog.title}', '${blog.preview}', ${blog.content}, '${blog.typeId}');`,
+    insertBlogData: (blog) => `INSERT INTO blog (image, title, preview, content, type_id, path) 
+    VALUES ('${blog.image}', '${blog.title}', '${blog.preview}', ${blog.content}, '${blog.typeId}', '${blog.path}');`,
     // 删除博客
     deleteBlogData: id => `DELETE FROM blog where id = '${id}';`,
     // 更新博客
-    updateBlogData: (blog) => `UPDATE blog SET image = '${blog.image}', preview = '${blog.preview}', title = '${blog.title}', content = ${blog.content}, type_id = '${blog.typeId}'
+    updateBlogData: (blog) => `UPDATE blog SET image = '${blog.image}', preview = '${blog.preview}', title = '${blog.title}', path = '${blog.path}', content = ${blog.content}, type_id = '${blog.typeId}'
     WHERE id = '${blog.id}'`,
 }

@@ -1,6 +1,6 @@
 <template>
   <div class="item-back">
-    <div class="image-back" @click="jumpBlog($event, options.id)">
+    <div class="image-back" @click="jumpBlog($event, options.id, options.path)">
       <el-image class="image" :src="options.image" fit="cover"></el-image>
     </div>
     <div class="time">{{ options.time }}</div>
@@ -10,7 +10,9 @@
       }}</a>
     </div>
     <h1 class="title">
-      <a href="#" @click="jumpBlog($event, options.id)">{{ options.title }}</a>
+      <a href="#" @click="jumpBlog($event, options.id, options.path)">{{
+        options.title
+      }}</a>
     </h1>
     <div class="preview-back">
       <p class="preview">{{ options.preview }}</p>
@@ -27,8 +29,17 @@ export default {
       event.preventDefault();
       this.$bus.$emit("changeToType", type);
     },
-    jumpBlog(event, id) {
+    jumpBlog(event, id, path) {
       event.preventDefault();
+      if (path.length > 0) {
+        this.$router.push({
+          path: path,
+          query: {
+            id,
+          },
+        });
+        return;
+      }
       this.$router.push({
         path: "./content",
         query: {

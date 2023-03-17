@@ -72,6 +72,14 @@
           ></el-image>
         </div>
         <el-input
+          type="text"
+          placeholder="请输入二级路由，如果有的话"
+          v-model="routePath"
+          maxlength="50"
+          clearable
+        >
+        </el-input>
+        <el-input
           type="textarea"
           placeholder="请输入预览"
           v-model="editPreview"
@@ -117,6 +125,7 @@ export default {
       rawBlogs: [],
       currentBlog: null,
       editTitle: "",
+      routePath: "",
       imageUrl: "",
       editPreview: "",
       editContent: "",
@@ -132,13 +141,16 @@ export default {
       this.currentBlog = null;
       this.editTitle = "";
       this.imageUrl = "";
+      this.routePath = "";
       this.editPreview = "";
       this.editContent = "";
     },
     // 改变类型
     changeType(index) {
       this.currentType = index;
-      this.blogs = this.rawBlogs.filter(blog => blog.typeId === this.types[index].id);
+      this.blogs = this.rawBlogs.filter(
+        (blog) => blog.typeId === this.types[index].id
+      );
       this.addNewBlog();
     },
     // 改变博客
@@ -147,6 +159,7 @@ export default {
       const blog = this.blogs[index];
       this.editTitle = blog.title;
       this.imageUrl = blog.image;
+      this.routePath = blog.path;
       this.editPreview = blog.preview;
       this.editContent = blog.content;
       this.types.forEach((type, index) => {
@@ -260,6 +273,7 @@ export default {
             this.currentBlog === null ? null : this.blogs[this.currentBlog].id,
           image: this.imageUrl,
           title: this.editTitle,
+          path: this.routePath,
           preview: this.editPreview,
           typeId: this.types[this.currentType].id,
           content: this.editContent,
