@@ -27,6 +27,11 @@ const routes = [
                         path: "/threejs1",
                         component: () =>
                             import ("@/views/front/threejs/blog1.vue")
+                    },
+                    {
+                        path: "/threejs2",
+                        component: () =>
+                            import ("@/views/front/threejs/blog2.vue")
                     }
                 ]
             },

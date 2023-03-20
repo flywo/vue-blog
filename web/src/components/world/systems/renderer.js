@@ -8,6 +8,8 @@ function createRenderer(width, height) {
     const renderer = new WebGLRenderer();
     renderer.setSize(width, height);
     renderer.setPixelRatio(window.devicePixelRatio);
+    // renderer.physicallyCorrectLights = true;
+    renderer.useLegacyLights = false;
     return renderer;
 }
 
