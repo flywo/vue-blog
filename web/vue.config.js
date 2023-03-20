@@ -11,9 +11,11 @@ module.exports = defineConfig({
         proxy: {
             "/api": {
                 target: "http://localhost:3000"
+                    // target: "https://www.yuhua.pub"
             },
             "/upload": {
                 target: "http://localhost:8081"
+                    // target: "https://www.yuhua.pub"
             },
         }
     }

@@ -1,7 +1,7 @@
 <template>
   <div class="item-back">
     <div class="image-back" @click="jumpBlog($event, options.id, options.path)">
-      <el-image class="image" :src="options.image" fit="cover"></el-image>
+      <el-image class="image" :src="options.image" fit="cover" lazy></el-image>
     </div>
     <div class="time">{{ options.time }}</div>
     <div class="type-back">

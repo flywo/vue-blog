@@ -17,6 +17,7 @@
         "normalize.css": "^8.0.1",
         "three": "^0.150.1",
         "vue": "^2.6.14",
+        "vue-infinite-scroll": "^2.0.2",
         "vue-router": "^3.5.1",
         "vuex": "^3.6.2"
     },

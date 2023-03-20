@@ -1,7 +1,12 @@
 <template>
   <div class="home-back">
     <div class="content" v-loading="loading">
-      <div class="list">
+      <div
+        class="list"
+        v-infinite-scroll="loadMore"
+        infinite-scroll-disabled="loading"
+        infinite-scroll-distance="100"
+      >
         <home-item
           class="item"
           v-for="(item, index) in list"
@@ -28,23 +33,44 @@ export default {
     return {
       list: [],
       loading: true,
+      pageNo: 1,
+      pageSize: 9,
+      isNoData: false,
     };
   },
   mounted() {
-    this.queryBlog(this.$route.query.typeId);
+    this.pageNo = 1;
+    this.queryBlog();
   },
   methods: {
-    queryBlog(typeId) {
+    loadMore() {
+      if (this.isNoData) {
+        return;
+      }
+      this.pageNo += 1;
+      this.queryBlog();
+    },
+    queryBlog() {
       get(
         "/blog/list",
-        typeId ? { typeId } : null,
+        {
+          pageNo: this.pageNo,
+          pageSize: this.pageSize,
+          typeId: this.$route.query.typeId,
+        },
         false,
         false,
         (data) => {
+          this.list = [...this.list, ...data];
           this.loading = false;
-          this.list = data;
+          if (data.length < this.pageSize) {
+            this.isNoData = true;
+          }
         },
         () => {
+          if (this.pageNo > 1) {
+            this.pageNo - 1;
+          }
           this.loading = false;
         }
       );

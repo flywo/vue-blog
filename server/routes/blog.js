@@ -13,7 +13,9 @@ router.prefix("/api/blog");
 
 router.get("/list", async(ctx, next) => {
     const typeId = ctx.query.typeId ? escape(ctx.query.typeId) : null;
-    const list = await exec(sql.queryBlogTable(typeId));
+    const pageNo = ctx.query.pageNo ? parseInt(ctx.query.pageNo) : -1;
+    const pageSize = ctx.query.pageSize ? parseInt(ctx.query.pageSize) : -1;
+    const list = await exec(sql.queryBlogTable(typeId, pageNo, pageSize));
     ctx.body = new SuccessModel(list);
 });
 
