@@ -4,7 +4,7 @@
       <div
         class="list"
         v-infinite-scroll="loadMore"
-        infinite-scroll-disabled="loading"
+        infinite-scroll-disabled="loadDisable"
         infinite-scroll-distance="100"
       >
         <home-item
@@ -14,6 +14,9 @@
           :options="item"
         >
         </home-item>
+      </div>
+      <div class="no-more">
+        {{ isNoData ? "没有更多数据" : "数据加载中..." }}
       </div>
       <el-empty v-if="list.length === 0" description="当前没有内容"></el-empty>
     </div>
@@ -33,6 +36,7 @@ export default {
     return {
       list: [],
       loading: true,
+      loadDisable: true,
       pageNo: 1,
       pageSize: 9,
       isNoData: false,
@@ -51,6 +55,7 @@ export default {
       this.queryBlog();
     },
     queryBlog() {
+      this.loadDisable = true;
       get(
         "/blog/list",
         {
@@ -63,6 +68,7 @@ export default {
         (data) => {
           this.list = [...this.list, ...data];
           this.loading = false;
+          this.loadDisable = false;
           if (data.length < this.pageSize) {
             this.isNoData = true;
           }
@@ -71,6 +77,7 @@ export default {
           if (this.pageNo > 1) {
             this.pageNo - 1;
           }
+          this.loadDisable = false;
           this.loading = false;
         }
       );
@@ -89,6 +96,12 @@ export default {
       display: grid;
       gap: 20px;
       transition: all 0.3s ease-out;
+    }
+    .no-more {
+      margin-block: 20px;
+      text-align: center;
+      font-size: 16px;
+      color: var(--text-black);
     }
   }
 }
