@@ -47,7 +47,7 @@ router.post("/delete", async(ctx, next) => {
 });
 
 router.get("/clear", async(ctx, next) => {
-    const list = await exec(sql.queryAllBlog());
+    const list = await exec(sql.queryAllBlog);
     removeNoUseImage(list);
     ctx.body = new SuccessModel("清理成功");
 });
