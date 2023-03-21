@@ -47,11 +47,20 @@ class World {
         window.addEventListener("resize", this.resizerMethod);
     }
 
-    // 渲染函数
-    render() {
+    // 每一帧调用
+    frameCall() {
+        if (this.renderMethod) {
+            this.renderMethod();
+        }
         this.control.update();
         this.renderer.render(this.scene, this.camera);
-        requestAnimationFrame(this.render.bind(this));
+        requestAnimationFrame(this.frameCall.bind(this));
+    }
+
+    // 渲染函数
+    render(renderMethod) {
+        this.renderMethod = renderMethod;
+        this.frameCall();
     }
 
     // 销毁
