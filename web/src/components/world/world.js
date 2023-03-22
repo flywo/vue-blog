@@ -43,8 +43,6 @@ class World {
         this.scene.add(this.axes);
         // 界面变化
         this.resizer = new Resizer(this.camera, this.renderer, container);
-        this.resizerMethod = this.resizer.resize.bind(this.resizer)
-        window.addEventListener("resize", this.resizerMethod);
     }
 
     // 每一帧调用
@@ -65,7 +63,7 @@ class World {
 
     // 销毁
     destroy() {
-        window.removeEventListener("resize", this.resizerMethod);
+        this.resizer.removeListen();
     }
 }
 

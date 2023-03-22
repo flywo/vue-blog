@@ -5,7 +5,10 @@ import {
 
 // 创建渲染器
 function createRenderer(width, height) {
-    const renderer = new WebGLRenderer();
+    const renderer = new WebGLRenderer({
+        // 抗锯齿开启
+        antialias: true
+    });
     renderer.setSize(width, height);
     renderer.setPixelRatio(window.devicePixelRatio);
     // renderer.physicallyCorrectLights = true;
