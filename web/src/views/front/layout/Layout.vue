@@ -35,11 +35,11 @@ export default {
     height: 20px;
     width: 100%;
     bottom: 0;
-    background-color: #6ae79244;
+    background-color: #6ae79277;
     display: flex;
     p {
       margin: auto;
-      color: #666;
+      color: white;
       font-size: 14px;
     }
   }

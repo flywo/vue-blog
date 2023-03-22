@@ -171,7 +171,7 @@ export default {
     position: relative;
     transition: all 0.3s ease-out;
     .name {
-      color: var(--text-black);
+      color: white;
       font-weight: bold;
       font-size: 35px;
       cursor: pointer;
@@ -189,7 +189,7 @@ export default {
         font-weight: 600;
         line-height: 1.45;
         letter-spacing: 0.5px;
-        color: var(--text-black);
+        color: white;
         cursor: pointer;
         transition: all 300ms ease;
         background-size: 0 4px;
@@ -274,6 +274,7 @@ export default {
       }
     }
     .nav-icon {
+      color: white;
       position: absolute;
       top: 45px;
       right: 10px;
