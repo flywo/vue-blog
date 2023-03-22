@@ -3,32 +3,11 @@
 </template>
 
 <script>
-import { World } from "@/components/world/world";
-import {
-  BoxGeometry,
-  Mesh,
-  MeshStandardMaterial,
-  DirectionalLight,
-} from "three";
+import * as THREE from "three";
+import { OrbitControls } from "three/examples/jsm/controls/OrbitControls.js";
 export default {
   name: "BlogView",
   mounted() {
-    this.world = new World(
-      document.querySelector(".scene-container"),
-      (scene) => {
-        const geometry = new BoxGeometry(2, 2, 2);
-        const material = new MeshStandardMaterial({
-          color: "orange",
-        });
-        const cube = new Mesh(geometry, material);
-        cube.rotation.set(-0.5, -0.1, 0.8);
-        const light = new DirectionalLight("white", 8);
-        light.position.set(10, 10, 10);
-        scene.add(cube, light);
-      }
-    );
-    this.world.render();
-    /*
     // 拿到容器
     const container = document.querySelector(".scene-container");
 
@@ -57,7 +36,7 @@ export default {
     // 盒子材质
     // const material = new THREE.MeshBasicMaterial();
     const material = new THREE.MeshStandardMaterial({
-        color: "orange",
+      color: "orange",
     });
     // 创建盒子物体
     const cube = new THREE.Mesh(geometry, material);
@@ -80,7 +59,8 @@ export default {
     // 渲染器像素比
     render.setPixelRatio(window.devicePixelRatio);
     // 开启物理上正确的照明
-    render.physicallyCorrectLights = true;
+    // render.physicallyCorrectLights = true;
+    render.useLegacyLights = false;
     // 添加到页面
     container.append(render.domElement);
 
@@ -96,35 +76,29 @@ export default {
 
     // 渲染函数
     function renderMethod() {
-        // 更新控制器
-        controls.update();
-        // 渲染
-        render.render(scene, camera);
-        // 每一帧都调用渲染函数
-        requestAnimationFrame(renderMethod);
+      // 更新控制器
+      controls.update();
+      // 渲染
+      render.render(scene, camera);
+      // 每一帧都调用渲染函数
+      requestAnimationFrame(renderMethod);
     }
     // 渲染
     renderMethod();
 
     // 界面变化
     window.addEventListener("resize", () => {
-        // 拿到容器
-        const container = document.querySelector(".scene-container");
-        // 更新相机宽高比
-        camera.aspect = container.clientWidth / container.clientHeight;
-        // 更新相机矩阵
-        camera.updateProjectionMatrix();
-        // 更新渲染器大小
-        render.setSize(container.clientWidth, container.clientHeight);
-        // 更新像素比
-        render.setPixelRatio(window.devicePixelRatio);
+      // 拿到容器
+      const container = document.querySelector(".scene-container");
+      // 更新相机宽高比
+      camera.aspect = container.clientWidth / container.clientHeight;
+      // 更新相机矩阵
+      camera.updateProjectionMatrix();
+      // 更新渲染器大小
+      render.setSize(container.clientWidth, container.clientHeight);
+      // 更新像素比
+      render.setPixelRatio(window.devicePixelRatio);
     });
-    */
-  },
-  beforeDestroy() {
-    if (this.world) {
-      this.world.destroy();
-    }
   },
 };
 </script>

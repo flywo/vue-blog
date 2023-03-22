@@ -3,64 +3,11 @@
 </template>
 
 <script>
-import { World } from "@/components/world/world";
-import {
-  BoxGeometry,
-  Mesh,
-  MeshStandardMaterial,
-  DirectionalLight,
-} from "three";
-// import * as THREE from "three";
-// import { OrbitControls } from "three/examples/jsm/controls/OrbitControls.js";
+import * as THREE from "three";
+import { OrbitControls } from "three/examples/jsm/controls/OrbitControls.js";
 export default {
   name: "BlogView",
   mounted() {
-    let cube;
-    // 是否在放大
-    let isZoom = true;
-    // 是否在往右移动
-    let isMoveRight = true;
-    this.world = new World(
-      document.querySelector(".scene-container"),
-      (scene) => {
-        const geometry = new BoxGeometry(2, 2, 2);
-        const material = new MeshStandardMaterial({
-          color: "orange",
-        });
-        cube = new Mesh(geometry, material);
-        cube.rotation.set(-0.5, -0.1, 0.8);
-        const light = new DirectionalLight("white", 8);
-        light.position.set(10, 10, 10);
-        scene.add(cube, light);
-      }
-    );
-    this.world.render(() => {
-      // 旋转
-      cube.rotation.x += 0.01;
-      // 缩放
-      if (isZoom) {
-        cube.scale.x += 0.01;
-      } else {
-        cube.scale.x -= 0.01;
-      }
-      if (cube.scale.x > 2) {
-        isZoom = false;
-      } else if (cube.scale.x < 1) {
-        isZoom = true;
-      }
-      // 平移
-      if (isMoveRight) {
-        cube.position.x += 0.01;
-      } else {
-        cube.position.x -= 0.01;
-      }
-      if (cube.position.x > 2) {
-        isMoveRight = false;
-      } else if (cube.position.x < -2) {
-        isMoveRight = true;
-      }
-    });
-    /*
     // 拿到容器
     const container = document.querySelector(".scene-container");
 
@@ -112,7 +59,8 @@ export default {
     // 渲染器像素比
     render.setPixelRatio(window.devicePixelRatio);
     // 开启物理上正确的照明
-    render.physicallyCorrectLights = true;
+    // render.physicallyCorrectLights = true;
+    render.useLegacyLights = false;
     // 添加到页面
     container.append(render.domElement);
 
@@ -180,12 +128,6 @@ export default {
       // 更新像素比
       render.setPixelRatio(window.devicePixelRatio);
     });
-    */
-  },
-  beforeDestroy() {
-    if (this.world) {
-      this.world.destroy();
-    }
   },
 };
 </script>

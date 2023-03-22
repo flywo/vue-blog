@@ -3,22 +3,11 @@
 </template>
 
 <script>
-import { World } from "@/components/world/world";
-import { BoxGeometry, Mesh, MeshBasicMaterial } from "three";
+import * as THREE from "three";
+import { OrbitControls } from "three/examples/jsm/controls/OrbitControls.js";
 export default {
   name: "BlogView",
   mounted() {
-    this.world = new World(
-      document.querySelector(".scene-container"),
-      (scene) => {
-        const geometry = new BoxGeometry(2, 2, 2);
-        const material = new MeshBasicMaterial();
-        const cube = new Mesh(geometry, material);
-        scene.add(cube);
-      }
-    );
-    this.world.render();
-    /*
     // 拿到容器
     const container = document.querySelector(".scene-container");
 
@@ -95,12 +84,6 @@ export default {
       // 更新像素比
       render.setPixelRatio(window.devicePixelRatio);
     });
-    */
-  },
-  beforeDestroy() {
-    if (this.world) {
-      this.world.destroy();
-    }
   },
 };
 </script>
