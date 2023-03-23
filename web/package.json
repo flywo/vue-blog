@@ -6,7 +6,8 @@
         "serve": "vue-cli-service serve",
         "build": "vue-cli-service build",
         "lint": "vue-cli-service lint",
-        "push": "./push.sh"
+        "push": "./push.sh",
+        "push-hw": "./push-hw.sh"
     },
     "dependencies": {
         "animate.css": "^4.1.1",

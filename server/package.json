@@ -7,7 +7,8 @@
         "dev": "cross-env NODE_ENV=dev ./node_modules/.bin/nodemon bin/www",
         "prd": "cross-env NODE_ENV=production pm2 start bin/www",
         "test": "echo \"Error: no test specified\" && exit 1",
-        "push": "./push.sh"
+        "push": "./push.sh",
+        "push-hw": "./push-hw.sh"
     },
     "dependencies": {
         "debug": "^4.1.1",
