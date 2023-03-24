@@ -20,6 +20,13 @@
               >
                 {{ item.title }}
               </div>
+              <div
+                :class="
+                  current === 1 && typeIndex === index ? 'current-type' : ''
+                "
+              >
+                {{ item.total }}篇
+              </div>
             </li>
           </ul>
         </div>
@@ -51,7 +58,11 @@
             v-for="(item, index) in types"
             :key="'drawer-type-' + index"
             :index="'1-' + index"
-            >{{ item.title }}</el-menu-item
+            ><div class="type-item">
+              <div>{{ item.title }}</div>
+              <div style="flex-grow: 1"></div>
+              <div>{{ item.total }}篇</div>
+            </div></el-menu-item
           >
         </el-submenu>
         <el-menu-item index="2">
@@ -234,6 +245,9 @@ export default {
             -o-transition: all 300ms ease;
             transition: all 300ms ease;
             cursor: pointer;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
             div {
               padding: 10px 25px;
               display: block;
@@ -281,6 +295,9 @@ export default {
       font-size: 30px;
       transition: all 0.3s ease-out;
     }
+  }
+  .type-item {
+    display: flex;
   }
 }
 @media only screen and (min-width: 1020px) {
