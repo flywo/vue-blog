@@ -4,7 +4,16 @@
     <div class="layout-nav">
       <nav-view></nav-view>
     </div>
-    <router-view :key="$route.path + $route.query.typeId"></router-view>
+    <keep-alive>
+      <router-view
+        v-if="$route.meta.keepAlive"
+        :key="$route.path + $route.query.typeId"
+      ></router-view>
+    </keep-alive>
+    <router-view
+      v-if="!$route.meta.keepAlive"
+      :key="$route.path + $route.query.typeId"
+    ></router-view>
     <div class="bottom">
       <p>蜀ICP备19041988号-1</p>
     </div>
@@ -17,7 +26,7 @@ import NavView from "./Nav.vue";
 export default {
   components: {
     NavView,
-    BackEndView
+    BackEndView,
   },
   name: "FrontLayout",
 };

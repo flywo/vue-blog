@@ -10,12 +10,12 @@ module.exports = defineConfig({
     devServer: {
         proxy: {
             "/api": {
-                target: "http://localhost:3000"
-                    // target: "https://www.yuhua.pub"
+                // target: "http://localhost:3000"
+                target: "https://www.yuhua.pub"
             },
             "/upload": {
-                target: "http://localhost:8081"
-                    // target: "https://www.yuhua.pub"
+                // target: "http://localhost:8081"
+                target: "https://www.yuhua.pub"
             },
         }
     }

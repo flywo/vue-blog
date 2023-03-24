@@ -14,7 +14,10 @@ const routes = [
             {
                 path: "/home",
                 component: () =>
-                    import ("@/views/front/home/Home.vue")
+                    import ("@/views/front/home/Home.vue"),
+                meta: {
+                    keepAlive: true
+                }
             },
             // 博客内容
             {
