@@ -38,6 +38,11 @@ export default {
       content: blog,
     };
   },
+  methods: {
+    jumpUrl({ url }) {
+      window.open(url);
+    },
+  },
 };
 </script>
 
