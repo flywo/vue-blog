@@ -45,6 +45,11 @@ const routes = [
                         path: "/threejs4",
                         component: () =>
                             import ("@/views/front/threejs/blog4.vue")
+                    },
+                    {
+                        path: "/threejs5",
+                        component: () =>
+                            import ("@/views/front/threejs/blog5.vue")
                     }
                 ]
             },
