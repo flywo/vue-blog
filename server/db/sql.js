@@ -23,7 +23,7 @@ module.exports = {
     );
     `,
     // 查询类型列表
-    queryTypeTable: `SELECT id, title, (SELECT COUNT(*) FROM blog WHERE type_id = type.id) AS total FROM type`,
+    queryTypeTable: `SELECT id, title, (SELECT COUNT(*) FROM blog WHERE type_id = type.id) AS total FROM type ORDER BY total DESC;`,
     // 插入类型数据
     insertTypeData: title => `INSERT INTO type (title) VALUES ('${title}');`,
     // 删除类型
