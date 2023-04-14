@@ -15,7 +15,7 @@
       :key="$route.path + $route.query.typeId"
     ></router-view>
     <div class="bottom">
-      <p>蜀ICP备19041988号-1</p>
+      <p @click="open">蜀ICP备19041988号-1</p>
     </div>
   </div>
 </template>
@@ -29,6 +29,11 @@ export default {
     BackEndView,
   },
   name: "FrontLayout",
+  methods: {
+    open() {
+      window.open("https://beian.miit.gov.cn/");
+    }
+  }
 };
 </script>
 
@@ -50,6 +55,7 @@ export default {
       margin: auto;
       color: white;
       font-size: 14px;
+      cursor: pointer;
     }
   }
 }
