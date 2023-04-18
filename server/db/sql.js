@@ -21,7 +21,17 @@ module.exports = {
         path VARCHAR(50) NOT NULL,
         CONSTRAINT fk_blog_type_id FOREIGN KEY (type_id) REFERENCES type(id)
     );
+    CREATE TABLE IF NOT EXISTS soup (
+        id INT AUTO_INCREMENT PRIMARY KEY,
+        content TEXT NOT NULL
+    );
     `,
+    // 插入毒鸡汤
+    insertSoupData: content => `INSERT INTO soup (content) VALUES ('${content}');`,
+    // 查询毒鸡汤总数
+    querySoupNumber: `SELECT COUNT(*) FROM soup`,
+    // 随机返回一条毒鸡汤数据
+    querySoupOne: `SELECT * FROM soup ORDER BY RAND() LIMIT 1;`,
     // 查询类型列表
     queryTypeTable: `SELECT id, title, (SELECT COUNT(*) FROM blog WHERE type_id = type.id) AS total FROM type ORDER BY total DESC;`,
     // 插入类型数据

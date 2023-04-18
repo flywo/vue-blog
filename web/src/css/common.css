@@ -26,3 +26,13 @@ li {
     padding: 20px;
     transition: all 0.3s ease-out;
 }
+
+.button-selected {
+    transition: all 0.1s ease-in-out;
+    cursor: pointer;
+}
+
+.button-selected:active {
+    opacity: 0.7;
+    transform: translateY(1px);
+}

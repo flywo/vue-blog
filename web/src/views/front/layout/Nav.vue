@@ -31,6 +31,8 @@
           </ul>
         </div>
         <div style="width: 20px"></div>
+        <div class="item" :class="current === 4 ? 'current' : ''">毒鸡汤</div>
+        <div style="width: 20px"></div>
         <div class="item" :class="current === 2 ? 'current' : ''">关于我</div>
         <div style="width: 20px"></div>
         <div class="item" :class="current === 3 ? 'current' : ''">关于博客</div>
@@ -65,6 +67,9 @@
             </div></el-menu-item
           >
         </el-submenu>
+        <el-menu-item index="4">
+          <span slot="title">毒鸡汤</span>
+        </el-menu-item>
         <el-menu-item index="2">
           <span slot="title">关于我</span>
         </el-menu-item>
@@ -110,6 +115,8 @@ export default {
       this.current = 2;
     } else if (this.$route.path === "/blog") {
       this.current = 3;
+    } else if (this.$route.path === "/soup") {
+      this.current = 4;
     }
   },
   beforeDestroy() {
@@ -128,6 +135,9 @@ export default {
         } else if (index === "3") {
           this.current = 3;
           this.$router.push("/blog");
+        } else if (index === "4") {
+          this.current = 4;
+          this.$router.push("/soup");
         }
       }
     },
@@ -162,6 +172,9 @@ export default {
       } else if (name === "关于博客") {
         this.current = 3;
         this.$router.push("/blog");
+      } else if (name === "毒鸡汤") {
+        this.current = 4;
+        this.$router.push("/soup");
       }
     },
   },

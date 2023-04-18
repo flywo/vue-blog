@@ -53,6 +53,12 @@ const routes = [
                     }
                 ]
             },
+            // 毒鸡汤
+            {
+                path: "/soup",
+                component: () =>
+                    import ("@/views/front/soup/soup.vue")
+            },
             // 关于我
             {
                 path: "/me",

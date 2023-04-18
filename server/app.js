@@ -15,6 +15,7 @@ const user = require("./routes/user");
 const type = require("./routes/type");
 const blog = require("./routes/blog");
 const file = require("./routes/file");
+const soup = require("./routes/soup");
 
 // error handler
 onerror(app)
@@ -44,13 +45,14 @@ app.use(async(ctx, next) => {
 app.use(koajwt({
     secret: 'blog'
 }).unless({
-    path: ["/api/user/login", "/api/type/list", "/api/blog/list", "/api/blog/detail", ]
+    path: ["/api/user/login", "/api/type/list", "/api/blog/list", "/api/blog/detail", "/api/soup/one", ]
 }));
 
 app.use(blog.routes(), blog.allowedMethods());
 app.use(type.routes(), type.allowedMethods());
 app.use(user.routes(), user.allowedMethods());
 app.use(file.routes(), file.allowedMethods());
+app.use(soup.routes(), soup.allowedMethods());
 
 // error-handling
 app.on('error', (err, ctx) => {
