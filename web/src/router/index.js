@@ -73,6 +73,12 @@ const routes = [
             }
         ]
     },
+    // 下雨
+    {
+        path: "/rainy",
+        component: () =>
+            import ("@/views/front/rainy/rainy.vue")
+    },
     // 管理登录
     {
         path: "/admin-login",

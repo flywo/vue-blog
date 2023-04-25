@@ -2,14 +2,11 @@ varying vec4 v_fragCoord;
 uniform vec2 u_resolution;
 uniform float u_time;
 uniform vec2 u_mouse;
-uniform vec2 u_position;
 const int octaves = 2;
 const float seed2 = 73156.8473192;
 const float seed = 43758.5453123;
 
 precision mediump float;
-
-uniform vec4 color;
 
 #define iterations 12
 #define formuparam 0.53

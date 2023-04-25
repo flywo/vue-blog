@@ -34,8 +34,7 @@ export default {
     const uniforms = {
       u_time: { type: "f", value: Math.random() * 100.0 },
       u_resolution: { type: "v2", value: new THREE.Vector2(1, 1) },
-      u_mouse: { type: "v2", value: new THREE.Vector2(1, 1, 1) },
-      u_position: { type: "v2", value: new THREE.Vector2(1, 1, 1) },
+      u_mouse: { type: "v2", value: new THREE.Vector2(1, 1) },
     };
     const plang = new THREE.PlaneGeometry(2, 2);
     const planm = new THREE.ShaderMaterial({
