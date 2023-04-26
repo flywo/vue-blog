@@ -28,9 +28,9 @@ export default {
     const ca = textureLoader.load(require("@/assets/light.jpeg"));
     const uniforms = {
       tDiffuse: { value: ca },
-      u_resolution: { value: [container.clientWidth, container.clientHeight] },
+      u_resolution: { value: [container.clientWidth*2, container.clientHeight*2] },
       u_time: { value: 0 },
-      u_transparent: { value: 0 },
+      u_transparent: { value: 0.5 },
     };
     const plang = new THREE.PlaneGeometry(2, 2);
     const planm = new THREE.ShaderMaterial({
@@ -47,6 +47,10 @@ export default {
     }
     renderMethod();
     window.addEventListener("resize", () => {
+      uniforms.u_resolution.value = [
+        container.clientWidth*2,
+        container.clientHeight*2,
+      ];
       camera.aspect = container.clientWidth / container.clientHeight;
       renderer.setSize(container.clientWidth, container.clientHeight);
       renderer.setPixelRatio(window.devicePixelRatio);
