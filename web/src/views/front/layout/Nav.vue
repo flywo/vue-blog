@@ -31,7 +31,20 @@
           </ul>
         </div>
         <div style="width: 20px"></div>
-        <div class="item" :class="current === 4 ? 'current' : ''">毒鸡汤</div>
+        <div class="item more" :class="current === 4 ? 'current' : ''">
+          小玩具
+          <ul class="sub-menu">
+            <li
+              v-for="(item, index) in ['毒鸡汤', '听雨轩']"
+              :key="item + index"
+              @click="changeMoreType(item)"
+            >
+              <div :class="current === 4 && 0 === index ? 'current-type' : ''">
+                {{ item }}
+              </div>
+            </li>
+          </ul>
+        </div>
         <div style="width: 20px"></div>
         <div class="item" :class="current === 2 ? 'current' : ''">关于我</div>
         <div style="width: 20px"></div>
@@ -47,8 +60,14 @@
       size="40%"
     >
       <el-menu
-        :default-active="current === 1 ? '1-' + typeIndex : current.toString()"
-        :default-openeds="current === 1 ? ['1'] : []"
+        :default-active="
+          current === 1
+            ? '1-' + typeIndex
+            : current === 4
+            ? '4-' + typeIndex
+            : current.toString()
+        "
+        :default-openeds="current === 1 ? ['1'] : current === 4 ? ['4'] : []"
         @select="selectMenu"
       >
         <el-menu-item index="0">
@@ -67,9 +86,17 @@
             </div></el-menu-item
           >
         </el-submenu>
-        <el-menu-item index="4">
-          <span slot="title">毒鸡汤</span>
-        </el-menu-item>
+        <el-submenu index="4">
+          <span slot="title">小玩具</span>
+          <el-menu-item
+            v-for="(item, index) in ['毒鸡汤', '听雨轩']"
+            :key="'drawer-type-more-' + index"
+            :index="'4-' + index"
+            ><div class="type-item">
+              <div>{{ item }}</div>
+            </div></el-menu-item
+          >
+        </el-submenu>
         <el-menu-item index="2">
           <span slot="title">关于我</span>
         </el-menu-item>
@@ -123,9 +150,21 @@ export default {
     this.$bus.$off("changeToType");
   },
   methods: {
+    // 切换nav，小屏时用
     selectMenu(index) {
       if (index.indexOf("-") !== -1) {
-        this.changeToType(this.types[parseInt(index.split("-")[1])]);
+        const arr = index.split("-");
+        if (arr[0] === "1") {
+          this.changeToType(this.types[parseInt(arr[1])]);
+        } else if (arr[0] === "4") {
+          let more;
+          if (arr[1] === "0") {
+            more = "毒鸡汤";
+          } else if (arr[1] === "1") {
+            more = "听雨轩";
+          }
+          this.changeMoreType(more);
+        }
       } else {
         if (index === "0") {
           this.changeToMain();
@@ -135,12 +174,10 @@ export default {
         } else if (index === "3") {
           this.current = 3;
           this.$router.push("/blog");
-        } else if (index === "4") {
-          this.current = 4;
-          this.$router.push("/soup");
         }
       }
     },
+    // 改变当前分类
     tidyTypeIndex(types, typeId) {
       types.forEach((item, index) => {
         if (item.id === typeId) {
@@ -148,6 +185,7 @@ export default {
         }
       });
     },
+    // 改变分类
     changeToType(type) {
       this.tidyTypeIndex(this.types, type.id);
       this.current = 1;
@@ -158,10 +196,21 @@ export default {
         },
       });
     },
+    // 跳到首页
     changeToMain() {
       this.current = 0;
       this.$router.push("/home");
     },
+    // 跳到更多
+    changeMoreType(type) {
+      if (type === "毒鸡汤") {
+        this.current = 4;
+        this.$router.push("/soup");
+      } else if (type === "听雨轩") {
+        window.open("/rainy");
+      }
+    },
+    // 更改当前nav，大屏时用
     changeCurrent(event) {
       const name = event.target.innerText;
       if (name === "首页") {
@@ -172,9 +221,6 @@ export default {
       } else if (name === "关于博客") {
         this.current = 3;
         this.$router.push("/blog");
-      } else if (name === "毒鸡汤") {
-        this.current = 4;
-        this.$router.push("/soup");
       }
     },
   },
