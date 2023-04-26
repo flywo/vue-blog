@@ -25,10 +25,12 @@ export default {
     renderer.setPixelRatio(window.devicePixelRatio);
     container.append(renderer.domElement);
     const textureLoader = new THREE.TextureLoader();
-    const ca = textureLoader.load(require("@/assets/light.jpeg"));
+    const ca = textureLoader.load(require("@/assets/green.jpeg"));
     const uniforms = {
       tDiffuse: { value: ca },
-      u_resolution: { value: [container.clientWidth*2, container.clientHeight*2] },
+      u_resolution: {
+        value: [container.clientWidth * 2, container.clientHeight * 2],
+      },
       u_time: { value: 0 },
       u_transparent: { value: 0.5 },
     };
@@ -48,8 +50,8 @@ export default {
     renderMethod();
     window.addEventListener("resize", () => {
       uniforms.u_resolution.value = [
-        container.clientWidth*2,
-        container.clientHeight*2,
+        container.clientWidth * 2,
+        container.clientHeight * 2,
       ];
       camera.aspect = container.clientWidth / container.clientHeight;
       renderer.setSize(container.clientWidth, container.clientHeight);
