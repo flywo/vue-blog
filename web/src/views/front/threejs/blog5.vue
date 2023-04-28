@@ -47,11 +47,13 @@ export default {
     scene.add(ambientLight);
 
     // 轨道控制器
-    new OrbitControls(camera, renderer.domElement);
+    const controls = new OrbitControls(camera, renderer.domElement);
+    controls.enableDamping = true;
 
     // 动画
     function animate() {
         requestAnimationFrame(animate);
+        controls.update();
         renderer.render(scene, camera);
     }
     animate();

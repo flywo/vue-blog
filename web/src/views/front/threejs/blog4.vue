@@ -62,6 +62,7 @@ export default {
     // 界面渲染
     const animate = () => {
       camera.lookAt(scene.position);
+      controls.update();
       renderer.render(scene, camera);
       requestAnimationFrame(animate);
     };

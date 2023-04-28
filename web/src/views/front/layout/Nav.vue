@@ -35,7 +35,7 @@
           小玩具
           <ul class="sub-menu">
             <li
-              v-for="(item, index) in ['毒鸡汤', '听雨轩']"
+              v-for="(item, index) in more"
               :key="item + index"
               @click="changeMoreType(item)"
             >
@@ -89,7 +89,7 @@
         <el-submenu index="4">
           <span slot="title">小玩具</span>
           <el-menu-item
-            v-for="(item, index) in ['毒鸡汤', '听雨轩']"
+            v-for="(item, index) in more"
             :key="'drawer-type-more-' + index"
             :index="'4-' + index"
             ><div class="type-item">
@@ -119,6 +119,7 @@ export default {
       types: [],
       showDrawer: false,
       typeIndex: 0,
+      more: ["毒鸡汤", "听雨轩", "方块城市"],
     };
   },
   watch: {
@@ -162,6 +163,8 @@ export default {
             more = "毒鸡汤";
           } else if (arr[1] === "1") {
             more = "听雨轩";
+          } else if (arr[1] === "2") {
+            more = "方块城市";
           }
           this.changeMoreType(more);
         }
@@ -208,6 +211,8 @@ export default {
         this.$router.push("/soup");
       } else if (type === "听雨轩") {
         window.open("/rainy");
+      } else if (type === "方块城市") {
+        window.open("/dark-city");
       }
     },
     // 更改当前nav，大屏时用

@@ -57,7 +57,7 @@ const routes = [
             {
                 path: "/soup",
                 component: () =>
-                    import ("@/views/front/soup/soup.vue")
+                    import ("@/views/front/more/soup/soup.vue")
             },
             // 关于我
             {
@@ -77,7 +77,13 @@ const routes = [
     {
         path: "/rainy",
         component: () =>
-            import ("@/views/front/rainy/rainy.vue")
+            import ("@/views/front/more/rainy/rainy.vue")
+    },
+    // 暗黑城市
+    {
+        path: "/dark-city",
+        component: () =>
+            import ("@/views/front/more/dark-city/dark-city.vue")
     },
     // 管理登录
     {
