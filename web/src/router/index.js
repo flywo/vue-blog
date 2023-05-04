@@ -59,6 +59,12 @@ const routes = [
                 component: () =>
                     import ("@/views/front/more/soup/soup.vue")
             },
+            // 表情包
+            {
+                path: "/emoticons",
+                component: () =>
+                    import ("@/views/front/more/emoticons/emoticons.vue")
+            },
             // 关于我
             {
                 path: "/me",

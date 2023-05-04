@@ -39,7 +39,15 @@
               :key="item + index"
               @click="changeMoreType(item)"
             >
-              <div :class="current === 4 && 0 === index ? 'current-type' : ''">
+              <div
+                :class="
+                  current === 4 &&
+                  ((index === 0 && $route.path === '/soup') ||
+                    (index === 3 && $route.path === '/emoticons'))
+                    ? 'current-type'
+                    : ''
+                "
+              >
                 {{ item }}
               </div>
             </li>
@@ -119,7 +127,7 @@ export default {
       types: [],
       showDrawer: false,
       typeIndex: 0,
-      more: ["毒鸡汤", "听雨轩", "方块城市"],
+      more: ["毒鸡汤", "听雨轩", "方块城市", "表情包"],
     };
   },
   watch: {
@@ -144,6 +152,10 @@ export default {
     } else if (this.$route.path === "/blog") {
       this.current = 3;
     } else if (this.$route.path === "/soup") {
+      this.typeIndex = 0;
+      this.current = 4;
+    } else if (this.$route.path === "/emoticons") {
+      this.typeIndex = 3;
       this.current = 4;
     }
   },
@@ -165,6 +177,8 @@ export default {
             more = "听雨轩";
           } else if (arr[1] === "2") {
             more = "方块城市";
+          } else if (arr[1] === "3") {
+            more = "表情包";
           }
           this.changeMoreType(more);
         }
@@ -207,12 +221,17 @@ export default {
     // 跳到更多
     changeMoreType(type) {
       if (type === "毒鸡汤") {
+        this.typeIndex = 0;
         this.current = 4;
         this.$router.push("/soup");
       } else if (type === "听雨轩") {
         window.open("/rainy");
       } else if (type === "方块城市") {
         window.open("/dark-city");
+      } else if (type === "表情包") {
+        this.typeIndex = 3;
+        this.current = 4;
+        this.$router.push("/emoticons");
       }
     },
     // 更改当前nav，大屏时用
