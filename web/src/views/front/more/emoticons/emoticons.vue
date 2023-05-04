@@ -237,10 +237,11 @@ export default {
       margin-top: 20px;
       display: flex;
       align-items: center;
+      flex-wrap: wrap;
       .build {
-        margin-left: 40px;
+        margin: 20px;
         color: white;
-        width: 200px;
+        width: 100px;
         height: 50px;
         background: var(--bg-green);
         border-radius: 5px;
