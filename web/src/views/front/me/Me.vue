@@ -8,10 +8,22 @@
       <div class="detail">
         <strong class="d-title">个人简介</strong>
         <p>
-          从13年大学毕业开始，一直从事编码工作。一开始搞C语言开发，后来搞iOS开发，搞iOS开发的时间最长，再后来看到了Flutter，于是开始搞Flutter，到现在搞前端，搞了前端过后，发现有Node.js这么个好东西，于是顺带着也会搞后端了。如今，我可以厚着脸皮说一声：<strong
-            >我是全栈！</strong
-          >
+          从13年大学毕业开始，一直从事编码工作。一开始搞C语言开发，后来机缘巧合下开始搞iOS开发，再后来学会了前后端开发、flutter开发，这些技术都有在真实的项目中有应用，当然如果仔细算起来搞iOS开发的时间还是最长的。我厚着脸皮说一声：<strong>我是全栈</strong>，不过分吧？
         </p>
+        <el-image
+          style="height: 300px; width: 100%"
+          :src="require('@/assets/fandui.gif')"
+          fit="contain"
+        ></el-image>
+        <p style="color: gray; font-size: 16px; text-align: center">
+          上面的表情包酷不酷，想不想自己用文字生成一个属于自己的表情包？快去<a
+            style="color: #6ae792"
+            href="/emoticons"
+            target="_blank"
+            >小玩具->表情包</a
+          >里看看吧。
+        </p>
+        <p>额，我说的是下面这个全栈。</p>
         <el-image
           style="height: 300px; width: 100%"
           :src="require('@/assets/me0.png')"
@@ -66,7 +78,7 @@
           <el-timeline-item timestamp="2015" placement="top">
             <el-card>
               <h4>iOS开发</h4>
-              <p>获得Objective-C、Swift语言开发技能。</p>
+              <p>获得Objective-C、Swift语言以及简单的网页、后端开发技能。</p>
             </el-card>
           </el-timeline-item>
           <el-timeline-item timestamp="2019" placement="top">
