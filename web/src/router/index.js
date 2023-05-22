@@ -50,6 +50,11 @@ const routes = [
                         path: "/threejs5",
                         component: () =>
                             import ("@/views/front/threejs/blog5.vue")
+                    },
+                    {
+                        path: "/threejs6",
+                        component: () =>
+                            import ("@/views/front/threejs/blog6.vue")
                     }
                 ]
             },
