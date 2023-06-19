@@ -96,6 +96,12 @@ const routes = [
         component: () =>
             import ("@/views/front/more/dark-city/dark-city.vue")
     },
+    // 星系
+    {
+        path: "/solar",
+        component: () =>
+            import ("@/views/front/more/solar/solar.vue")
+    },
     // 管理登录
     {
         path: "/admin-login",

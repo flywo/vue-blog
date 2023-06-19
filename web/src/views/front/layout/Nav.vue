@@ -127,7 +127,7 @@ export default {
       types: [],
       showDrawer: false,
       typeIndex: 0,
-      more: ["毒鸡汤", "听雨轩", "方块城市", "表情包"],
+      more: ["毒鸡汤", "听雨轩", "方块城市", "表情包", "九大行星"],
     };
   },
   watch: {
@@ -179,6 +179,8 @@ export default {
             more = "方块城市";
           } else if (arr[1] === "3") {
             more = "表情包";
+          } else if (arr[1] === "4") {
+            more = "九大行星";
           }
           this.changeMoreType(more);
         }
@@ -228,6 +230,8 @@ export default {
         window.open("/rainy");
       } else if (type === "方块城市") {
         window.open("/dark-city");
+      } else if (type === "九大行星") {
+        window.open("/solar");
       } else if (type === "表情包") {
         this.typeIndex = 3;
         this.current = 4;
