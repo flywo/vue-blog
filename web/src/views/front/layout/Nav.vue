@@ -127,7 +127,7 @@ export default {
       types: [],
       showDrawer: false,
       typeIndex: 0,
-      more: ["毒鸡汤", "听雨轩", "方块城市", "表情包", "九大行星"],
+      more: ["毒鸡汤", "听雨轩", "方块城市", "表情包", "九大行星", "国王大厅"],
     };
   },
   watch: {
@@ -181,6 +181,8 @@ export default {
             more = "表情包";
           } else if (arr[1] === "4") {
             more = "九大行星";
+          } else if (arr[1] === "5") {
+            more = "国王大厅";
           }
           this.changeMoreType(more);
         }
@@ -232,6 +234,8 @@ export default {
         window.open("/dark-city");
       } else if (type === "九大行星") {
         window.open("/solar");
+      } else if (type === "国王大厅") {
+        window.open("/king");
       } else if (type === "表情包") {
         this.typeIndex = 3;
         this.current = 4;

@@ -102,6 +102,12 @@ const routes = [
         component: () =>
             import ("@/views/front/more/solar/solar.vue")
     },
+    // 国王大厅
+    {
+        path: "/king",
+        component: () =>
+            import ("@/views/front/more/king/king.vue")
+    },
     // 管理登录
     {
         path: "/admin-login",

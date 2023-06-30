@@ -150,7 +150,11 @@ export default {
     }
   },
   beforeDestroy() {},
-  methods: {},
+  methods: {
+    open() {
+      window.open("https://beian.miit.gov.cn/");
+    },
+  },
 };
 </script>
 
