@@ -2,16 +2,18 @@
   <div
     class="king-back"
     v-loading="loading"
-    :element-loading-text="'加载资源中，已加载: ' + progress + '%'"
+    :element-loading-text="
+      '加载资源中，由于资金有限，服务器带宽很小，所以需要下载一段时间，估计两三分钟左右，请稍候，已加载: ' +
+      progress +
+      '%'
+    "
     element-loading-spinner="el-icon-loading"
     element-loading-background="rgba(0, 0, 0, 0.8)"
   >
     <div class="k-b-bg" ref="container"></div>
     <div class="content" v-if="!loading">
       <h1>国王大厅</h1>
-      <h3>
-        这是一个国王大厅，你可以点击鼠标左键，切换查看视角。
-      </h3>
+      <h3>这是一个国王大厅，你可以点击鼠标左键，切换查看视角。</h3>
       <p class="more">
         更多有趣的内容，请关注<a class="more-a" target="_blank" href="/"
           >余华的个人博客</a
