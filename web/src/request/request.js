@@ -2,6 +2,7 @@ import axios from "axios";
 import {
     Message
 } from "element-ui";
+import localforage from "localforage";
 
 // 创建实例
 const service = axios.create({
@@ -124,4 +125,32 @@ export function upload(
         success,
         fail
     );
+}
+
+// 下载文件
+export async function download(
+    url,
+    progress,
+    success,
+    fail
+) {
+    localforage.config({
+        name: "BigFile",
+    });
+    const result = await localforage.getItem(url);
+    if (result) {
+        success(window.URL.createObjectURL(result));
+    } else {
+        axios({
+            method: "GET",
+            url,
+            responseType: "blob",
+            onDownloadProgress: (event) => {
+                progress((event.progress * 100).toFixed(2));
+            },
+        }).then(response => {
+            localforage.setItem(url, response.data);
+            success(window.URL.createObjectURL(response.data))
+        }).catch(fail)
+    }
 }

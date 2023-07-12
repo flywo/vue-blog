@@ -16,6 +16,7 @@
         "element-ui": "^2.15.12",
         "gif.js": "^0.2.0",
         "gsap": "^3.12.2",
+        "localforage": "^1.10.0",
         "markdown-it-vue": "^1.1.7",
         "normalize.css": "^8.0.1",
         "omggif": "^1.0.10",
