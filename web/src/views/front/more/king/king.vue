@@ -65,7 +65,7 @@ export default {
     renderer.toneMapping = THREE.ACESFilmicToneMapping;
 
     let position = 0;
-    gltfLoader.load("http://file.yuhua.pub/glb/king_room.glb", function (gltf) {
+    gltfLoader.load("/file/glb/king_room.glb", function (gltf) {
       const model = gltf.scene;
       scene.add(model);
 

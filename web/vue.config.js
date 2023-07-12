@@ -27,6 +27,10 @@ module.exports = defineConfig({
                 // target: "http://localhost:8081"
                 target: "https://www.yuhua.pub"
             },
+            "/file": {
+                // target: "http://localhost:8081"
+                target: "https://www.yuhua.pub"
+            }
         }
     }
 })
