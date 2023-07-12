@@ -2,11 +2,7 @@
   <div
     class="king-back"
     v-loading="loading"
-    :element-loading-text="
-      '加载资源中，请稍候，已加载: ' +
-      progress +
-      '%'
-    "
+    :element-loading-text="'加载资源中，请稍候，已加载: ' + progress + '%'"
     element-loading-spinner="el-icon-loading"
     element-loading-background="rgba(0, 0, 0, 0.8)"
   >
@@ -70,7 +66,7 @@ export default {
 
     let position = 0;
     gltfLoader.load(
-      "http://file.yuhua.pub/glb/king_room.glb?e=1689130950&token=EDih116pHc9h1uAs9Ypvs_cD5refqOREvYr5IQDm:5JkxgaKmcyOp6Xs4IsAiTAf2_dg=",
+      "https://file.yuhua.pub/glb/king_room.glb?e=1689134300&token=EDih116pHc9h1uAs9Ypvs_cD5refqOREvYr5IQDm:8HaYGw0r-NPtqQtUxIBzp5lBucg=",
       function (gltf) {
         const model = gltf.scene;
         scene.add(model);
