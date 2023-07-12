@@ -3,7 +3,7 @@
     class="king-back"
     v-loading="loading"
     :element-loading-text="
-      '加载资源中，由于资金有限，服务器带宽很小，所以需要下载一段时间，估计两三分钟左右，请稍候，已加载: ' +
+      '加载资源中，请稍候，已加载: ' +
       progress +
       '%'
     "
@@ -69,60 +69,63 @@ export default {
     renderer.toneMapping = THREE.ACESFilmicToneMapping;
 
     let position = 0;
-    gltfLoader.load("static/gltf/the_king_s_hall/scene.gltf", function (gltf) {
-      const model = gltf.scene;
-      scene.add(model);
+    gltfLoader.load(
+      "http://file.yuhua.pub/glb/king_room.glb?e=1689130950&token=EDih116pHc9h1uAs9Ypvs_cD5refqOREvYr5IQDm:5JkxgaKmcyOp6Xs4IsAiTAf2_dg=",
+      function (gltf) {
+        const model = gltf.scene;
+        scene.add(model);
 
-      window.addEventListener("mouseup", function () {
-        switch (position) {
-          case 0:
-            moveCamera(-1.8, 1.6, 5);
-            rotateCamera(0, 0.1, 0);
-            position = 1;
-            break;
-          case 1:
-            moveCamera(2.8, 0, 3.6);
-            rotateCamera(0, -2, 0);
-            position = 2;
-            break;
-          case 2:
-            moveCamera(2.5, -0.9, 12.2);
-            rotateCamera(0.9, 0.6, -0.6);
-            position = 3;
-            break;
-          case 3:
-            moveCamera(-2.7, 0.6, 3.7);
-            rotateCamera(0.6, 1.9, -0.6);
-            position = 4;
-            break;
-          case 4:
-            moveCamera(-1.7, 0, 8.7);
-            rotateCamera(0, 4.7, 0);
-            position = 5;
-            break;
-          case 5:
-            moveCamera(0.5, 0.8, 10);
-            rotateCamera(0.3, 1.65, -0.3);
-            position = 0;
+        window.addEventListener("mouseup", function () {
+          switch (position) {
+            case 0:
+              moveCamera(-1.8, 1.6, 5);
+              rotateCamera(0, 0.1, 0);
+              position = 1;
+              break;
+            case 1:
+              moveCamera(2.8, 0, 3.6);
+              rotateCamera(0, -2, 0);
+              position = 2;
+              break;
+            case 2:
+              moveCamera(2.5, -0.9, 12.2);
+              rotateCamera(0.9, 0.6, -0.6);
+              position = 3;
+              break;
+            case 3:
+              moveCamera(-2.7, 0.6, 3.7);
+              rotateCamera(0.6, 1.9, -0.6);
+              position = 4;
+              break;
+            case 4:
+              moveCamera(-1.7, 0, 8.7);
+              rotateCamera(0, 4.7, 0);
+              position = 5;
+              break;
+            case 5:
+              moveCamera(0.5, 0.8, 10);
+              rotateCamera(0.3, 1.65, -0.3);
+              position = 0;
+          }
+        });
+        function moveCamera(x, y, z) {
+          gsap.to(camera.position, {
+            x,
+            y,
+            z,
+            duration: 3,
+          });
         }
-      });
-      function moveCamera(x, y, z) {
-        gsap.to(camera.position, {
-          x,
-          y,
-          z,
-          duration: 3,
-        });
+        function rotateCamera(x, y, z) {
+          gsap.to(camera.rotation, {
+            x,
+            y,
+            z,
+            duration: 3.2,
+          });
+        }
       }
-      function rotateCamera(x, y, z) {
-        gsap.to(camera.rotation, {
-          x,
-          y,
-          z,
-          duration: 3.2,
-        });
-      }
-    });
+    );
 
     function animate() {
       renderer.render(scene, camera);
