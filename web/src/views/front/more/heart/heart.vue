@@ -59,7 +59,10 @@ export default {
     container.append(renderer.domElement);
     const uniforms = {
       u_resolution: {
-        value: [container.clientWidth * 2, container.clientHeight * 2],
+        value: [
+          container.clientWidth * window.devicePixelRatio,
+          container.clientHeight * window.devicePixelRatio,
+        ],
       },
       u_time: { value: 0 },
     };
@@ -79,8 +82,8 @@ export default {
     renderMethod();
     window.addEventListener("resize", () => {
       uniforms.u_resolution.value = [
-        container.clientWidth * 2,
-        container.clientHeight * 2,
+        container.clientWidth * window.devicePixelRatio,
+        container.clientHeight * window.devicePixelRatio,
       ];
       camera.aspect = container.clientWidth / container.clientHeight;
       renderer.setSize(container.clientWidth, container.clientHeight);
