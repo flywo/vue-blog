@@ -108,6 +108,12 @@ const routes = [
         component: () =>
             import ("@/views/front/more/king/king.vue")
     },
+    // 心动声音
+    {
+        path: "/heart",
+        component: () =>
+            import ("@/views/front/more/heart/heart.vue")
+    },
     // 管理登录
     {
         path: "/admin-login",

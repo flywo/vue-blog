@@ -7,7 +7,7 @@
         :src="require(isPlay ? '@/assets/pause4.png' : '@/assets/play4.png')"
         @click="play"
       ></el-image>
-      <audio ref="audioplayer" loop="loop">
+      <audio ref="audioplayer" :loop="true">
         <source :src="require('@/assets/rainy.mp3')" type="audio/mpeg" />
       </audio>
       <el-slider class="voice-slider" v-model="voice"></el-slider>
