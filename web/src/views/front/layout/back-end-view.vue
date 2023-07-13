@@ -32,9 +32,13 @@ export default {
 
     // 渲染器
     const uniforms = {
-      u_time: { type: "f", value: Math.random() * 100.0 },
-      u_resolution: { type: "v2", value: new THREE.Vector2(1, 1) },
-      u_mouse: { type: "v2", value: new THREE.Vector2(1, 1) },
+      u_resolution: {
+        value: [
+          container.clientWidth * window.devicePixelRatio,
+          container.clientHeight * window.devicePixelRatio,
+        ],
+      },
+      u_time: { value: 0 },
     };
     const plang = new THREE.PlaneGeometry(2, 2);
     const planm = new THREE.ShaderMaterial({
@@ -58,8 +62,10 @@ export default {
 
     // 界面变化
     window.addEventListener("resize", () => {
-      // 拿到容器
-      const container = document.querySelector(".b-e-view");
+      uniforms.u_resolution.value = [
+        container.clientWidth * window.devicePixelRatio,
+        container.clientHeight * window.devicePixelRatio,
+      ];
       // 更新相机宽高比
       camera.aspect = container.clientWidth / container.clientHeight;
       // 更新渲染器大小
