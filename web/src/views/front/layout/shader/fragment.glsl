@@ -100,71 +100,71 @@ void main()
     vec3 cpos2 = campos - c*rd;
     float radius = length(cpos2.xz)/1000.0;
 
-    if (radius<1.8)
-    {
-  	  for (int q=10; q>-10; q--) 
-      {
-		if (sum.w>0.999) continue;
-        float c = (float(q)*8.-campos.y) / rd.y; 
-        vec3 cpos = campos + c*rd;
+    // if (radius<1.8)
+    // {
+  	//   for (int q=10; q>-10; q--) 
+    //   {
+	// 	if (sum.w>0.999) continue;
+    //     float c = (float(q)*8.-campos.y) / rd.y; 
+    //     vec3 cpos = campos + c*rd;
 
-   		float see = dot(normalize(cpos), normalize(campos));
-		vec3 lightUnvis = vec3(.0,.0,.0 );
-		vec3 lightVis   = vec3(1.3,1.2,1.2 );
-		vec3 shine = mix(lightVis, lightUnvis, smoothstep(0.0, 1.0, see));
+   	// 	float see = dot(normalize(cpos), normalize(campos));
+	// 	vec3 lightUnvis = vec3(.0,.0,.0 );
+	// 	vec3 lightVis   = vec3(1.3,1.2,1.2 );
+	// 	vec3 shine = mix(lightVis, lightUnvis, smoothstep(0.0, 1.0, see));
 
- 	    float radius = length(cpos.xz)/999.;
-	    if (radius>1.0)
-	      continue;
+ 	//     float radius = length(cpos.xz)/999.;
+	//     if (radius>1.0)
+	//       continue;
 
-		float rot = 3.00*(radius)-time;
-      	cpos.xz = cpos.xz*mat2(cos(rot), -sin(rot), sin(rot), cos(rot));
+	// 	float rot = 3.00*(radius)-time;
+    //   	cpos.xz = cpos.xz*mat2(cos(rot), -sin(rot), sin(rot), cos(rot));
  	
-		cpos += vec3(831.0+shift.x, 321.0+float(q)*mix(250.0, 50.0, radius)-shift.x*0.2, 1330.0+shift.y); 
-		cpos *= mix(0.0025, 0.0028, radius); 
-      	float alpha = smoothstep(0.50, 1.0, fbm( cpos )); 
-	  	alpha *= 1.3*pow(smoothstep(1.0, 0.0, radius), 0.3);
-	  	vec3 dustcolor = mix(vec3( 2.0, 1.3, 1.0 ), vec3( 0.1,0.2,0.3 ), pow(radius, .5));
-      	vec3 localcolor = mix(dustcolor, shine, alpha); 
+	// 	cpos += vec3(831.0+shift.x, 321.0+float(q)*mix(250.0, 50.0, radius)-shift.x*0.2, 1330.0+shift.y); 
+	// 	cpos *= mix(0.0025, 0.0028, radius); 
+    //   	float alpha = smoothstep(0.50, 1.0, fbm( cpos )); 
+	//   	alpha *= 1.3*pow(smoothstep(1.0, 0.0, radius), 0.3);
+	//   	vec3 dustcolor = mix(vec3( 2.0, 1.3, 1.0 ), vec3( 0.1,0.2,0.3 ), pow(radius, .5));
+    //   	vec3 localcolor = mix(dustcolor, shine, alpha); 
 		  
-		float gstar = 2.*pow(noise( cpos*21.40 ), 22.0);
-		float gstar2= 3.*pow(noise( cpos*26.55 ), 34.0);
-		float gholes= 1.*pow(noise( cpos*11.55 ), 14.0);
-		localcolor += vec3(1.0, 0.6, 0.3)*gstar;
-		localcolor += vec3(1.0, 1.0, 0.7)*gstar2;
-		localcolor -= gholes;
+	// 	float gstar = 2.*pow(noise( cpos*21.40 ), 22.0);
+	// 	float gstar2= 3.*pow(noise( cpos*26.55 ), 34.0);
+	// 	float gholes= 1.*pow(noise( cpos*11.55 ), 14.0);
+	// 	localcolor += vec3(1.0, 0.6, 0.3)*gstar;
+	// 	localcolor += vec3(1.0, 1.0, 0.7)*gstar2;
+	// 	localcolor -= gholes;
 		  
-        alpha = (1.0-sum.w)*alpha; 
-        sum += vec4(localcolor*alpha, alpha); 
-	  }
+    //     alpha = (1.0-sum.w)*alpha; 
+    //     sum += vec4(localcolor*alpha, alpha); 
+	//   }
 		
-  	  for (int q=0; q<20; q++) 
-      {
-		if (sum.w>0.999) continue;
-        float c = (float(q)*4.-campos.y) / rd.y; 
-        vec3 cpos = campos + c*rd;
+  	//   for (int q=0; q<20; q++) 
+    //   {
+	// 	if (sum.w>0.999) continue;
+    //     float c = (float(q)*4.-campos.y) / rd.y; 
+    //     vec3 cpos = campos + c*rd;
 
-   		float see = dot(normalize(cpos), normalize(campos));
-		vec3 lightUnvis = vec3(.0,.0,.0 );
-		vec3 lightVis   = vec3(1.3,1.2,1.2 );
-		vec3 shine = mix(lightVis, lightUnvis, smoothstep(0.0, 1.0, see));
+   	// 	float see = dot(normalize(cpos), normalize(campos));
+	// 	vec3 lightUnvis = vec3(.0,.0,.0 );
+	// 	vec3 lightVis   = vec3(1.3,1.2,1.2 );
+	// 	vec3 shine = mix(lightVis, lightUnvis, smoothstep(0.0, 1.0, see));
 
- 	    float radius = length(cpos.xz)/200.0;
-	    if (radius>1.0)
-	      continue;
+ 	//     float radius = length(cpos.xz)/200.0;
+	//     if (radius>1.0)
+	//       continue;
 
-		float rot = 3.2*(radius)-time*1.1;
-      	cpos.xz = cpos.xz*mat2(cos(rot), -sin(rot), sin(rot), cos(rot));
+	// 	float rot = 3.2*(radius)-time*1.1;
+    //   	cpos.xz = cpos.xz*mat2(cos(rot), -sin(rot), sin(rot), cos(rot));
  	
-		cpos += vec3(831.0+shift.x, 321.0+float(q)*mix(250.0, 50.0, radius)-shift.x*0.2, 1330.0+shift.y); 
-      	float alpha = 0.1+smoothstep(0.6, 1.0, fbm( cpos )); 
-	  	alpha *= 1.2*(pow(smoothstep(1.0, 0.0, radius), 0.72) - pow(smoothstep(1.0, 0.0, radius*1.875), 0.2)); 
-      	vec3 localcolor = vec3(0.0, 0.0, 0.0); 
+	// 	cpos += vec3(831.0+shift.x, 321.0+float(q)*mix(250.0, 50.0, radius)-shift.x*0.2, 1330.0+shift.y); 
+    //   	float alpha = 0.1+smoothstep(0.6, 1.0, fbm( cpos )); 
+	//   	alpha *= 1.2*(pow(smoothstep(1.0, 0.0, radius), 0.72) - pow(smoothstep(1.0, 0.0, radius*1.875), 0.2)); 
+    //   	vec3 localcolor = vec3(0.0, 0.0, 0.0); 
   
-        alpha = (1.0-sum.w)*alpha;
-        sum += vec4(localcolor*alpha, alpha); 
-	  }
-    }
+    //     alpha = (1.0-sum.w)*alpha;
+    //     sum += vec4(localcolor*alpha, alpha); 
+	//   }
+    // }
 	float alpha = smoothstep(1.-radius*.5, 1.0, sum.w);
     sum.rgb /= sum.w+0.0001;
     sum.rgb -= 0.2*vec3(0.8, 0.75, 0.7) * pow(sundot,10.0)*alpha;
