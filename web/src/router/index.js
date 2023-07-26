@@ -55,7 +55,13 @@ const routes = [
                         path: "/threejs6",
                         component: () =>
                             import ("@/views/front/threejs/blog6.vue")
-                    }
+                    },
+                    // glsl
+                    {
+                        path: "/glsl1",
+                        component: () =>
+                            import ("@/views/front/glsl/glsl1.vue")
+                    },
                 ]
             },
             // 毒鸡汤
