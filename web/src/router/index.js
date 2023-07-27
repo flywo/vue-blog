@@ -62,6 +62,11 @@ const routes = [
                         component: () =>
                             import ("@/views/front/glsl/glsl1.vue")
                     },
+                    {
+                        path: "/glsl2",
+                        component: () =>
+                            import ("@/views/front/glsl/glsl2.vue")
+                    },
                 ]
             },
             // 毒鸡汤
