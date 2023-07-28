@@ -38,7 +38,7 @@ export default {
           container.clientHeight * window.devicePixelRatio,
         ],
       },
-      u_time: { value: 120 },
+      u_time: { value: 0 },
     };
     const plang = new THREE.PlaneGeometry(2, 2);
     const planm = new THREE.ShaderMaterial({

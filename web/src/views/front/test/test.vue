@@ -87,22 +87,28 @@ export default {
       width: 100%;
       opacity: 0;
       transition: 0.5s;
+      border-radius: 16px;
     }
     .c-item:nth-child(1) {
       background-color: #ff000077;
+      border: 3px solid #ff0000;
     }
     .c-item:nth-child(2) {
       background-color: #00ff0077;
+      border: 3px solid #00ff00;
     }
     .c-item:nth-child(3) {
       background-color: #0000ff77;
+      border: 3px solid #0000ff;
     }
     .c-item:nth-child(4) {
       background-color: #00f0f077;
+      border: 3px solid #00f0f0;
     }
     .c-item:last-child {
       opacity: 1;
-      background-color: #00000077;
+      background: rgba(155,200,72,.8);
+      border: 3px solid rgba(155,200,72);
     }
   }
   .container:hover {
