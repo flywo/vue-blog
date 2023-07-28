@@ -92,7 +92,13 @@ const routes = [
                 path: "/blog",
                 component: () =>
                     import ("@/views/front/blog/Blog.vue")
-            }
+            },
+            // 测试页面
+            {
+                path: "/test",
+                component: () =>
+                    import ("@/views/front/test/test.vue")
+            },
         ]
     },
     // 下雨
