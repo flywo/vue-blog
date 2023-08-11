@@ -1,12 +1,23 @@
 <template>
   <div class="test-back">
     <div class="container">
-      <div class="c-item"></div>
-      <div class="c-item"></div>
-      <div class="c-item"></div>
-      <div class="c-item"></div>
-      <div class="c-item code" ref="code">
-        <p v-for="(item, index) in code" :key="'i-c-' + index">{{ item }}</p>
+      <div class="c-item">
+        <div class="title">这是页面5</div>
+      </div>
+      <div class="c-item">
+        <div class="title">这是页面4</div>
+      </div>
+      <div class="c-item">
+        <div class="title">这是页面3</div>
+      </div>
+      <div class="c-item">
+        <div class="title">这是页面2</div>
+      </div>
+      <div class="c-item code">
+        <div class="c-content" ref="code">
+          <p v-for="(item, index) in code" :key="'i-c-' + index">{{ item }}</p>
+        </div>
+        <div class="title">这是代码滚动页面</div>
       </div>
     </div>
   </div>
@@ -71,12 +82,19 @@ export default {
     width: 20%;
     position: relative;
     .code {
-      display: flex;
-      flex-direction: column;
-      overflow-y: hidden;
-      p {
-        margin-block: 5px;
-        color: white;
+      height: 100%;
+      width: 100%;
+      .c-content {
+        display: flex;
+        flex-direction: column;
+        height: 100%;
+        width: 100%;
+        overflow-y: hidden;
+        transition: 0.5s;
+        p {
+          margin-block: 5px;
+          color: white;
+        }
       }
     }
     .c-item {
@@ -88,6 +106,15 @@ export default {
       opacity: 0;
       transition: 0.5s;
       border-radius: 16px;
+      .title {
+        color: white;
+        font-size: 30px;
+        position: absolute;
+        right: 0;
+        bottom: 0;
+        transition: 0.5s;
+        transform: translateX(105%);
+      }
     }
     .c-item:nth-child(1) {
       background-color: #ff000077;
@@ -107,13 +134,16 @@ export default {
     }
     .c-item:last-child {
       opacity: 1;
-      background: rgba(155,200,72,.8);
-      border: 3px solid rgba(155,200,72);
+      background: rgba(155, 200, 72, 0.8);
+      border: 3px solid rgba(155, 200, 72);
     }
   }
   .container:hover {
     .c-item {
       opacity: 1;
+      .title {
+        bottom: 85%;
+      }
     }
     .c-item:nth-child(1) {
       transform: rotate(16deg) skew(-25deg) scale(0.7) translate(30vmin, 30vmin);
